@@ -215,4 +215,25 @@
     transition: color 0.4s ease;
   }
   
+  ul.no {     
+      list-style-type: none; /* Remove bullets /     
+      padding: 0; / Remove padding /     
+      margin: 0; / Remove margins */   
+      
+}
+
+h1 {
+    font-family: 'Forte', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 72px;
+    padding:10px;
+
+}
+
+h4 {
+    font-family: 'Forte', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 56px;
+    padding:10px;
+
+}
+  
   

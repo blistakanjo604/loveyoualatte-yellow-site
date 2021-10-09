@@ -35,7 +35,8 @@
           <li>Primary Address</li>
           <li>4401 Livingston Avenue, OH</li>
           <li>Phone: 614-008-5721</li>
-          <li>Email: yellowteam@loveyoualatte.com</li>
+          <li>Email</li>
+		  <a href = "mailto: yellowteam@loveyoualatte.com">yellowteam@loveyoualatte.com</a
         </ul>
         <h2>Got a question? We’d love to hear from you.</h2>
       <a href="index.php" class="btn">Home</a><br><br>

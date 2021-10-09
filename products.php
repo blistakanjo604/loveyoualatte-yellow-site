@@ -4,10 +4,36 @@
   <link rel="stylesheet" href="js/js1/bootstrap.bundle.min.js">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  <link rel="stylesheet" href="css/hamburger.css">
+  <style>
+    h1 {text-align: center;}
+  </style>
 </head>
+
+<!-- sidebar -->
+<body>  
+  <div class="menu-wrap">
+    <input type="checkbox" class="toggler">
+    <div class="hamburger"><div></div></div>
+    <div class="menu">
+      <div>
+        <div>
+          <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="pages/FAQ.php">FAQ</a></li>
+            <li><a href="ContactUs.php">Contact Us</a></li>
+	        <li><a href="products.php">Product Menu</a></li>
+            <li><a href="form.php">Sign-up (Old Website)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 
 
 <!-- products section -->
+<h1>Product Menu</h1>
 <section id="products">
     <div class="container">
         <div class="row">
