@@ -12,8 +12,8 @@
 	<script src="https://use.typekit.net/axs3axn.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/main2.css">
-	<link rel="stylesheet" href="../css/hamburger.css">
+    <!--link rel="stylesheet" type="text/css" href="css/main2.css"-->
+	<link rel="stylesheet" href="css/hamburger.css">
     </head>
 
      <body>
@@ -24,11 +24,12 @@
 			  <div>
 				<div>
 				  <ul>
-					<li><a href="../index.php">Home</a></li>
-					<li><a href="../pages/FAQ.php">FAQ</a></li>
-					<li><a href="../ContactUs.php">Contact Us</a></li>
-					<li><a href="../products.php">Product Menu</a></li>
-					<li><a href="../form.php">Sign-up (Old Website)</a></li>
+					<li><a href="index.php">Home</a></li>
+                    <li><a href="FAQ.php">FAQ</a></li>
+                    <li><a href="ContactUs.php">Contact Us</a></li>
+                    <li><a href="products.php">Product Menu</a></li>
+                    <li><a href="form.php">Sign-up (Old Website)</a></li>
+                    <li><a href="shopping_cart.php">shopping cart</a></li>
 				  </ul>
 				</div>
 			  </div>

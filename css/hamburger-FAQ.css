@@ -32,7 +32,7 @@
   
   .showcase:before {
     content: '';
-    background: url('https://images.pexels.com/photos/533923/pexels-photo-533923.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center/cover;
+    background: url(../img/love6.jpg) no-repeat center center/cover;
     position: absolute;
     top: 0;
     left: 0;
@@ -214,5 +214,19 @@
     text-decoration: none;
     transition: color 0.4s ease;
   }
+  
+/*  ul.no {     
+      list-style-type: none; /* Remove bullets /     
+      padding: 0; / Remove padding /     
+      margin: 0; / Remove margins /   
+      
+}
+
+h1 {
+    font-family: 'Forte', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 72px;
+    padding:10px;
+
+} */
   
   
