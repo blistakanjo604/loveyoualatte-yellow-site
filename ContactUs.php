@@ -20,9 +20,7 @@
             <li><a href="index.php">Home</a></li>
             <li><a href="FAQ.php">FAQ</a></li>
             <li><a href="ContactUs.php">Contact Us</a></li>
-	        <li><a href="products.php">Product Menu</a></li>
-            <li><a href="form.php">Sign-up (Old Website)</a></li>
-            <li><a href="shopping_cart.php">shopping cart</a></li>
+	        <li><a href="product_menu.php">Product Menu</a></li>
           </ul>
         </div>
       </div>

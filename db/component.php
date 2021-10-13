@@ -4,7 +4,7 @@ function component($productname, $productprice, $productimg, $productid){
     $element = "
     
     <div class=\"col-md-3 col-sm-6 my-3 my-md-0\">
-                <form action=\"shopping_cart.php\" method=\"post\">
+                <form action=\"product_menu.php\" method=\"post\">
                     <div class=\"card shadow\">
                         <div>
                             <img src=\"$productimg\" alt=\"Image1\" class=\"img-fluid card-img-top\">
@@ -49,8 +49,8 @@ function cartElement($productimg, $productname, $productprice, $productid){
                                 <h5 class=\"pt-2\">$productname</h5>
                                 <small class=\"text-secondary\">Seller: dailytuition</small>
                                 <h5 class=\"pt-2\">$$productprice</h5>
-                                <button type=\"submit\" class=\"btn btn-warning\">Save for Later</button>
-                                <button type=\"submit\" class=\"btn btn-danger mx-2\" name=\"remove\">Remove</button>
+                                <!--button type=\"submit\" class=\"btn btn-warning\">Save for Later</button>
+                                <button type=\"submit\" class=\"btn btn-danger mx-2\" name=\"remove\">Remove All</button-->
                             </div>
                             <div class=\"col-md-3 py-5\">
                                 <div>

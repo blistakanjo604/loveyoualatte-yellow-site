@@ -7,7 +7,7 @@ require_once ("db/component.php");
 
 $db = new CreateDb("loveyoualatte", "Productdb");
 
-if (isset($_POST['remove'])){
+/*if (isset($_POST['remove'])){
   if ($_GET['action'] == 'remove'){
       foreach ($_SESSION['cart'] as $key => $value){
           if($value["product_id"] == $_GET['id']){
@@ -15,6 +15,16 @@ if (isset($_POST['remove'])){
               echo "<script>alert('Product has been Removed...!')</script>";
               echo "<script>window.location = 'cart.php'</script>";
           }
+      }
+  }
+}*/
+
+if (isset($_POST['remove'])){
+  if ($_GET['action'] == 'remove'){
+      foreach ($_SESSION['cart'] as $key => $value){
+              unset($_SESSION['cart'][$key]);
+              echo "<script>alert('Cart has been cleared…!')</script>";
+              echo "<script>window.location = 'cart.php'</script>";
       }
   }
 }
@@ -43,6 +53,8 @@ if (isset($_POST['remove'])){
 
 <?php
     require_once ('db/header.php');
+    require_once ("db/CreateDb.php");
+    require_once ("db/component.php");
 ?>
 
 <div class="container-fluid">
@@ -94,6 +106,7 @@ if (isset($_POST['remove'])){
                         <hr>
                         <h6>Amount Payable</h6>
                     </div>
+                      
                     <div class="col-md-6">
                         <h6>$<?php echo $total; ?></h6>
                         <h6 class="text-success">FREE</h6>
@@ -102,6 +115,15 @@ if (isset($_POST['remove'])){
                             echo $total;
                             ?></h6>
                     </div>
+                    
+                    <form action="cart.php?action=remove" method="post" class="cart-items">
+                            <div class="col-md-6">
+                                <!--button type="submit" class="btn btn-warning\">Save for Later</button-->
+                                <button type="submit" class="btn btn-danger mx-2" name="remove">Clear Cart</button>
+                            </div>
+                </form> 
+                
+                
                 </div>
             </div>
 
