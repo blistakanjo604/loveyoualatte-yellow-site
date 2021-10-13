@@ -38,7 +38,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/373888/pexels-photo-373888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                <div class="card"> <img class="card-img-top" src="img/pexels-photo-373888.jpeg">
                     <div class="card-body">
                         <h5><center><b>Drip Coffee</b></center> </h5>
                         <div class="d-flex justify-content-center my-2">
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/302904/pexels-photo-302904.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                <div class="card"> <img class="card-img-top" src="img/pexels-photo-302904-resized.jpeg">
                     <div class="card-body">
                         <h5><center><b>Latte</b></center> </h5>
                         <div class="d-flex justify-content-center my-2">
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/9009823/pexels-photo-9009823.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                <div class="card"> <img class="card-img-top" src="img/pexels-photo-9009823-resized.jpeg">
                     <div class="card-body">
 						<h5><center><b>Cappuccino</b></center> </h5>
                         <div class="d-flex justify-content-center my-2">
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/1233528/pexels-photo-1233528.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                <div class="card"> <img class="card-img-top" src="img/pexels-photo-1233528.jpeg">
                     <div class="card-body">
 						<h5><center><b>Espresso</b></center> </h5>
                         <div class="d-flex justify-content-center my-2">
@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/685529/pexels-photo-685529.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                <div class="card"> <img class="card-img-top" src="img/pexels-photo-685529.jpeg">
                     <div class="card-body">
 						<h5><center><b>Macchiato</b></center> </h5>
                         <div class="d-flex justify-content-center my-2">
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card d-relative"> <img class="card-img-top" src="https://images.pexels.com/photos/2910874/pexels-photo-2910874.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                <div class="card d-relative"> <img class="card-img-top" src="img/pexels-photo-2910874-resized.jpeg">
                     <div class="card-body">
 						<h5><center><b>Mocha</b></center> </h5>
                         <div class="d-flex justify-content-center my-2">
