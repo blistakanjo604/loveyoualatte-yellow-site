@@ -67,7 +67,7 @@ if (isset($_POST['add'])){
     <div class="menu">
       <div>
         <div>
-          <ul>  <!-- add pages/ once we clean up the sites directory  -->
+          <ul>  <!-- add pages/ once we clean up the sites directory...this file used to be called "shopping_cart.php"  -->
             <li><a href="index.php">Home</a></li>
             <li><a href="FAQ.php">FAQ</a></li>
             <li><a href="ContactUs.php">Contact Us</a></li>
