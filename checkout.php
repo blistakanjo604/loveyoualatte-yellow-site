@@ -51,10 +51,11 @@ if (isset($_POST['remove'])){
 <body class="bg-light">
 
 <?php
-    require_once ('db/header.php');
+    require_once ("db/header.php");
     require_once ("db/CreateDb.php");
     require_once ("db/component.php");
 ?>
+
 
 <div class="container-fluid">
     <div class="row px-5">
@@ -74,7 +75,7 @@ if (isset($_POST['remove'])){
                             foreach ($product_id as $id){
                                 if ($row['id'] == $id){
                                     cartElement($row['product_image'], $row['product_name'],$row['product_price'], $row['id'], $_SESSION["product-qty"]);
-                                    $total = $total + (int)$row['product_price'];
+                                    $total = $total + $row['product_price'];
                                 }
                             }
                         }
@@ -87,20 +88,31 @@ if (isset($_POST['remove'])){
             </div>
         </div>
         <div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
-        
-                <form action="cart.php?action=remove" method="post" class="cart-items">
-                            <div class="col-md-6">
-                                <!--button type="submit" class="btn btn-warning\">Save for Later</button-->
-                                <button type="submit" class="btn btn-danger mx-2" name="remove">Clear Cart</button>
-                            </div>
-                </form> 
-                
-                <form action="checkout.php" method="post" class="cart-items">
-                            <div class="col-md-6">
-                                <!--button type="submit" class="btn btn-warning\">Save for Later</button-->
-                                <button type="submit" class="btn btn-danger mx-2" name="remove">Checkout</button>
-                            </div>
-                </form> 
+
+            <div class="pt-4">
+                <h6>RECEIPT# <?php echo rand() . "\n";?> <?php date_default_timezone_set("America/New_York"); echo "<br><br>CHECKOUT TIME: " . date("Y-m-d h:i:sa"); ?> </h6>
+                <hr>
+                <div class="row price-details">
+                    <div class="col-md-6">
+                        <?php
+                            if (isset($_SESSION['cart'])){
+                                $count  = count($_SESSION['cart']);
+                                echo "<h6>Price ($count items)</h6>";
+                            }else{
+                                echo "<h6>Price (0 items)</h6>";
+                            }
+                        ?>
+                        <hr>
+                        <h6>Amount Paid</h6>
+                    </div>
+                      
+                    <div class="col-md-6">
+                        <h6>$<?php echo $total; ?></h6>
+                        <hr>
+                        <h6>$<?php
+                            echo $total;
+                            ?></h6>
+                    </div>
                 
                 
                 </div>

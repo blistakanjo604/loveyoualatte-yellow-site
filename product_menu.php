@@ -4,31 +4,37 @@ session_start();
 
 require_once ('db/CreateDb.php');
 require_once ('db/component.php');
+require_once ("db/header.php");
 
+$_SESSION["product-qty"] = 0;
 
 // create instance of Createdb class
 $database = new CreateDb("loveyoualatte", "Productdb");
 
 if (isset($_POST['add'])){
     /// print_r($_POST['product_id']);
+    
+    $_SESSION["product-qty"] = $_SESSION["product-qty"] + 1;
+    $_SESSION["product-qty"] = $_SESSION["product-qty"];
+    
     if(isset($_SESSION['cart'])){
 
         $item_array_id = array_column($_SESSION['cart'], "product_id");
-
-        if(in_array($_POST['product_id'], $item_array_id)){
-            echo "<script>alert('Product is already added in the cart..!')</script>";
-            echo "<script>window.location = 'index.php'</script>";
-        }else{
+        
+        /* if(in_array($_POST['product_id'], $item_array_id)){
+           // echo "<script>alert('Product is already added in the cart..!')</script>";
+           $_SESSION["product-qty"] = $_SESSION["product-qty"]++;
+           // echo "<script>window.location = 'product_menu.php'</script>";
+        } else{ */
 
             $count = count($_SESSION['cart']);
             $item_array = array(
                 'product_id' => $_POST['product_id']
             );
-
+            
             $_SESSION['cart'][$count] = $item_array;
         }
-
-    }else{
+    else{
 
         $item_array = array(
                 'product_id' => $_POST['product_id']
@@ -67,7 +73,7 @@ if (isset($_POST['add'])){
     <div class="menu">
       <div>
         <div>
-          <ul>  <!-- add pages/ once we clean up the sites directory...this file used to be called "shopping_cart.php"  -->
+          <ul>  <!-- add pages/ once we clean up the sites directory  -->
             <li><a href="index.php">Home</a></li>
             <li><a href="FAQ.php">FAQ</a></li>
             <li><a href="ContactUs.php">Contact Us</a></li>
@@ -78,8 +84,6 @@ if (isset($_POST['add'])){
     </div>
   </div>
 
-
-<?php require_once ("db/header.php"); ?>
 <div class="container">
         <div class="row text-center py-5">
             <?php
