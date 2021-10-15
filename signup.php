@@ -1,4 +1,5 @@
 <?php
+
 include_once 'db_connect.php';
 
 /* $first = $_POST['first'];
@@ -10,12 +11,9 @@ $sql = "INSERT INTO `loveyoualatte`.`customer` (`faux`) VALUES ('faux');";
 
 echo(date("Y-m-d H:i:s"));
 
-if ($conn->query($sql) === true)
-{
+if ($conn->query($sql) === true) {
     echo "<br><br>New record created successfully";
-}
-else
-{
+} else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
@@ -26,5 +24,3 @@ $conn->close();
 
 header("Location: index.php");
 die();
-
-?>

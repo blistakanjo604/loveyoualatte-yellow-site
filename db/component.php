@@ -1,8 +1,9 @@
 <?php
 
-function component($productname, $productprice, $productimg, $productid){
+function component($productname, $productprice, $productimg, $productid)
+{
     $element = "
-    
+
     <div class=\"col-md-3 col-sm-6 my-3 my-md-0\">
                 <form action=\"product_menu.php\" method=\"post\">
                     <div class=\"card shadow\">
@@ -32,9 +33,10 @@ function component($productname, $productprice, $productimg, $productid){
     echo $element;
 }
 
-function cartElement($productimg, $productname, $productprice, $productid, $productqty){
+function cartElement($productimg, $productname, $productprice, $productid, $productqty)
+{
     $element = "
-    
+
     <form action=\"cart.php?action=remove&id=$productid\" method=\"post\" class=\"cart-items\">
                     <div class=\"border rounded\">
                         <div class=\"row bg-white\">
@@ -58,24 +60,7 @@ function cartElement($productimg, $productname, $productprice, $productid, $prod
                         </div>
                     </div>
                 </form>
-    
+
     ";
     echo  $element;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

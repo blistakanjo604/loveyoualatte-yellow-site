@@ -9,7 +9,7 @@
   <title>Love you A Latte (Yellow 02 Capstone)</title>
 </head>
 <body>
-    
+
   <div class="menu-wrap">
     <input type="checkbox" class="toggler">
     <div class="hamburger"><div></div></div>
@@ -32,18 +32,18 @@
       <h1>Love you A Latte</h1>
       <p>Click our menu button in the upper left of the screen, and  select where you would like to go.</p>
       <a href="index.php" class="btn">Home</a><br><br>
-      
+
       <!-- Testing out Database Time Retrieval -->
-      
+
       <form  action="signup.php" method="POST">
                 <!--a type="submit" class="btn"> 🥚 THE BUTTON 🥚 </a--> <!-- Let's try to make the fancy button work soon -->
 				<button type="submit" name="submit">🥚 THE BUTTON 🥚</button>
 				<p id="time"></p>
 			</form>
-			
-			<?php 
+
+			<?php
                     // Dirty code just to get things working…
-                    
+
                     include_once 'db_connect_index.php';
 
             ?>

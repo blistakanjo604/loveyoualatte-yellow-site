@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once ("db/CreateDb.php");
-require_once ("db/component.php");
+require_once("db/CreateDb.php");
+require_once("db/component.php");
 $db = new CreateDb("loveyoualatte", "Productdb");
 
 /*if (isset($_POST['remove'])){
@@ -18,14 +18,14 @@ $db = new CreateDb("loveyoualatte", "Productdb");
   }
 }*/
 
-if (isset($_POST['remove'])){
-  if ($_GET['action'] == 'remove'){
-      foreach ($_SESSION['cart'] as $key => $value){
-              unset($_SESSION['cart'][$key]);
-              echo "<script>alert('Cart has been cleared…!')</script>";
-              echo "<script>window.location = 'cart.php'</script>";
-      }
-  }
+if (isset($_POST['remove'])) {
+    if ($_GET['action'] == 'remove') {
+        foreach ($_SESSION['cart'] as $key => $value) {
+            unset($_SESSION['cart'][$key]);
+            echo "<script>alert('Cart has been cleared…!')</script>";
+            echo "<script>window.location = 'cart.php'</script>";
+        }
+    }
 }
 
 
@@ -51,9 +51,9 @@ if (isset($_POST['remove'])){
 <body class="bg-light">
 
 <?php
-    require_once ('db/header.php');
-    require_once ("db/CreateDb.php");
-    require_once ("db/component.php");
+    require_once('db/header.php');
+    require_once("db/CreateDb.php");
+    require_once("db/component.php");
 ?>
 
 <div class="container-fluid">
@@ -66,19 +66,19 @@ if (isset($_POST['remove'])){
                 <?php
 
                 $total = 0;
-                    if (isset($_SESSION['cart'])){
+                    if (isset($_SESSION['cart'])) {
                         $product_id = array_column($_SESSION['cart'], 'product_id');
 
                         $result = $db->getData();
-                        while ($row = mysqli_fetch_assoc($result)){
-                            foreach ($product_id as $id){
-                                if ($row['id'] == $id){
-                                    cartElement($row['product_image'], $row['product_name'],$row['product_price'], $row['id'], $_SESSION["product-qty"]);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            foreach ($product_id as $id) {
+                                if ($row['id'] == $id) {
+                                    cartElement($row['product_image'], $row['product_name'], $row['product_price'], $row['id'], $_SESSION["product-qty"]);
                                     $total = $total + (int)$row['product_price'];
                                 }
                             }
                         }
-                    }else{
+                    } else {
                         echo "<h5>Cart is Empty</h5>";
                     }
 
@@ -87,22 +87,22 @@ if (isset($_POST['remove'])){
             </div>
         </div>
         <div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
-        
+
                 <form action="cart.php?action=remove" method="post" class="cart-items">
                             <div class="col-md-6">
                                 <!--button type="submit" class="btn btn-warning\">Save for Later</button-->
                                 <button type="submit" class="btn btn-danger mx-2" name="remove">Clear Cart</button>
                             </div>
-                </form> 
-                
+                </form>
+
                 <form action="checkout.php" method="post" class="cart-items">
                             <div class="col-md-6">
                                 <!--button type="submit" class="btn btn-warning\">Save for Later</button-->
                                 <button type="submit" class="btn btn-danger mx-2" name="remove">Checkout</button>
                             </div>
-                </form> 
-                
-                
+                </form>
+
+
                 </div>
             </div>
 

@@ -2,40 +2,37 @@
 
 session_start();
 
-require_once ('db/CreateDb.php');
-require_once ('db/component.php');
-require_once ("db/header.php");
+require_once('db/CreateDb.php');
+require_once('db/component.php');
+require_once("db/header.php");
 
 $_SESSION["product-qty"] = 0;
 
 // create instance of Createdb class
 $database = new CreateDb("loveyoualatte", "Productdb");
 
-if (isset($_POST['add'])){
+if (isset($_POST['add'])) {
     /// print_r($_POST['product_id']);
-    
+
     $_SESSION["product-qty"] = $_SESSION["product-qty"] + 1;
     $_SESSION["product-qty"] = $_SESSION["product-qty"];
-    
-    if(isset($_SESSION['cart'])){
 
+    if (isset($_SESSION['cart'])) {
         $item_array_id = array_column($_SESSION['cart'], "product_id");
-        
+
         /* if(in_array($_POST['product_id'], $item_array_id)){
            // echo "<script>alert('Product is already added in the cart..!')</script>";
            $_SESSION["product-qty"] = $_SESSION["product-qty"]++;
            // echo "<script>window.location = 'product_menu.php'</script>";
         } else{ */
 
-            $count = count($_SESSION['cart']);
-            $item_array = array(
+        $count = count($_SESSION['cart']);
+        $item_array = array(
                 'product_id' => $_POST['product_id']
             );
-            
-            $_SESSION['cart'][$count] = $item_array;
-        }
-    else{
 
+        $_SESSION['cart'][$count] = $item_array;
+    } else {
         $item_array = array(
                 'product_id' => $_POST['product_id']
         );
@@ -88,7 +85,7 @@ if (isset($_POST['add'])){
         <div class="row text-center py-5">
             <?php
                 $result = $database->getData();
-                while ($row = mysqli_fetch_assoc($result)){
+                while ($row = mysqli_fetch_assoc($result)) {
                     component($row['product_name'], $row['product_price'], $row['product_image'], $row['id']);
                 }
             ?>

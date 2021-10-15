@@ -23,11 +23,9 @@ $amounts = array(
 );
 
 //Load up session
-if (!isset($_SESSION["total"]))
-{
+if (!isset($_SESSION["total"])) {
     $_SESSION["total"] = 0;
-    for ($i = 0;$i < count($products);$i++)
-    {
+    for ($i = 0;$i < count($products);$i++) {
         $_SESSION["qty"][$i] = 0;
         $_SESSION["amounts"][$i] = 0;
     }
@@ -35,22 +33,18 @@ if (!isset($_SESSION["total"]))
 
 //---------------------------
 //Reset
-if (isset($_GET['reset']))
-{
-    if ($_GET["reset"] == 'true')
-    {
+if (isset($_GET['reset'])) {
+    if ($_GET["reset"] == 'true') {
         unset($_SESSION["qty"]); //The quantity for each product
         unset($_SESSION["amounts"]); //The amount from each product
         unset($_SESSION["total"]); //The total cost
         unset($_SESSION["cart"]); //Which item has been chosen
-        
     }
 }
 
 //---------------------------
 //Add
-if (isset($_GET["add"]))
-{
+if (isset($_GET["add"])) {
     $i = $_GET["add"];
     $qty = $_SESSION["qty"][$i] + 1;
     $_SESSION["amounts"][$i] = $amounts[$i] * $qty;
@@ -60,20 +54,16 @@ if (isset($_GET["add"]))
 
 //---------------------------
 //Delete
-if (isset($_GET["delete"]))
-{
+if (isset($_GET["delete"])) {
     $i = $_GET["delete"];
     $qty = $_SESSION["qty"][$i];
     $qty--;
     $_SESSION["qty"][$i] = $qty;
     //remove item if quantity is zero
-    if ($qty == 0)
-    {
+    if ($qty == 0) {
         $_SESSION["amounts"][$i] = 0;
         unset($_SESSION["cart"][$i]);
-    }
-    else
-    {
+    } else {
         $_SESSION["amounts"][$i] = $amounts[$i] * $qty;
     }
 }
@@ -88,15 +78,14 @@ if (isset($_GET["delete"]))
    <th>Action</th>
    </tr>
  <?php
-for ($i = 0;$i < count($products);$i++)
-{
-?>
+for ($i = 0;$i < count($products);$i++) {
+    ?>
    <tr>
-   <td><?php echo ($products[$i]); ?></td>
+   <td><?php echo($products[$i]); ?></td>
    <td width="10px">&nbsp;</td>
-   <td><?php echo ($amounts[$i]); ?></td>
+   <td><?php echo($amounts[$i]); ?></td>
    <td width="10px">&nbsp;</td>
-   <td><a href="?add=<?php echo ($i); ?>">Add to cart</a></td>
+   <td><a href="?add=<?php echo($i); ?>">Add to cart</a></td>
    </tr>
    <?php
 }
@@ -109,9 +98,8 @@ for ($i = 0;$i < count($products);$i++)
  </tr>
  </table>
  <?php
-if (isset($_SESSION["cart"]))
-{
-?>
+if (isset($_SESSION["cart"])) {
+    ?>
  <br/><br/><br/>
  <h2>Cart</h2>
  <table>
@@ -126,25 +114,23 @@ if (isset($_SESSION["cart"]))
  </tr>
  <?php
     $total = 0;
-    foreach ($_SESSION["cart"] as $i)
-    {
-?>
+    foreach ($_SESSION["cart"] as $i) {
+        ?>
  <tr>
- <td><?php echo ($products[$_SESSION["cart"][$i]]); ?></td>
+ <td><?php echo($products[$_SESSION["cart"][$i]]); ?></td>
  <td width="10px">&nbsp;</td>
- <td><?php echo ($_SESSION["qty"][$i]); ?></td>
+ <td><?php echo($_SESSION["qty"][$i]); ?></td>
  <td width="10px">&nbsp;</td>
- <td><?php echo ($_SESSION["amounts"][$i]); ?></td>
+ <td><?php echo($_SESSION["amounts"][$i]); ?></td>
  <td width="10px">&nbsp;</td>
- <td><a href="?delete=<?php echo ($i); ?>">Delete from cart</a></td>
+ <td><a href="?delete=<?php echo($i); ?>">Delete from cart</a></td>
  </tr>
  <?php
         $total = $total + $_SESSION["amounts"][$i];
     }
-    $_SESSION["total"] = $total;
-?>
+    $_SESSION["total"] = $total; ?>
  <tr>
- <td colspan="7">Total : <?php echo ($total); ?></td>
+ <td colspan="7">Total : <?php echo($total); ?></td>
  </tr>
  </table>
  <?php
