@@ -186,6 +186,7 @@ if (isset($_SESSION["cart"])) {
           <br>
           <p>All site content is in the Public Domain.</p>
           <p><small>Powered by <a href="https://github.com/blistakanjo604">github/blistakanjo604</a></small></p>
+          <p><small>are you an employee? <a href="login.php">log-in!</a></small></p>
       </footer>
 
 </body></html>
