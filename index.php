@@ -1,53 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet" href="css/hamburger.css">
-  <title>Love you A Latte (Yellow 02 Capstone)</title>
-</head>
-<body>
-    
-  <div class="menu-wrap">
-    <input type="checkbox" class="toggler">
-    <div class="hamburger"><div></div></div>
-    <div class="menu">
-      <div>
-        <div>
-          <ul> <!-- add pages/ once we clean up the sites directory  -->
-            <li><a href="index.php">Home</a></li>
-            <li><a href="FAQ.php">FAQ</a></li>
-            <li><a href="ContactUs.php">Contact Us</a></li>
-	        <li><a href="product_menu.php">Product Menu</a></li>
-          </ul>
-        </div>
+<html lang=en>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <title>☕ Love You A Latte 🍵</title>
+        <meta name="description" content="Hello World! Only a simple coffee site (but respects your dark mode setting and has responsive web design). No ads, no tracking, nothing but basic coffee and good service.">
+    </head>
+    <body>
+      <div class=banner>
+          <h1 class=forte>☕ Love You A Latte 🍵</h1>
+          <hr/>
       </div>
-    </div>
+      <p class="centered">Hello World! Only a simple coffee site (but respects your dark mode setting and has responsive web design). No ads, no tracking, nothing but basic coffee and good service.</p>
+      <hr>
+
+      <div class="centered">
+
+      <h2>
+
+      <a href="index.php">home</a>
+      <a href="contact.php">contact</a>
+      <a href="faq.php">faq</a>
+      <a href="menu.php">menu</a>
+
+    </h2>
+
+      <hr>
+
+      <br><br>
+
+
+      <form  action="retrieve.php" method="POST">
+              <!--a type="submit" class="btn"> 🥚 THE BUTTON 🥚 </a--> <!-- Let's try to make the fancy button work soon -->
+      <button type="submit" name="submit">🥚 THE BUTTON 🥚</button>
+    </form>
+
+    <?php
+// Dirty code just to get things working…
+include_once 'db_connect.php';
+
+?>
+
+
   </div>
 
-  <header class="showcase">
-    <div class="container showcase-inner">
-      <h1>Love you A Latte</h1>
-      <p>Click our menu button in the upper left of the screen, and  select where you would like to go.</p>
-      <a href="index.php" class="btn">Home</a><br><br>
-      
-      <!-- Testing out Database Time Retrieval -->
-      
-      <form  action="signup.php" method="POST">
-                <!--a type="submit" class="btn"> 🥚 THE BUTTON 🥚 </a--> <!-- Let's try to make the fancy button work soon -->
-				<button type="submit" name="submit">🥚 THE BUTTON 🥚</button>
-				<p id="time"></p>
-			</form>
-			
-			<?php 
-                    // Dirty code just to get things working…
-                    
-                    include_once 'db_connect_index.php';
+      <br><br><br>
 
-            ?>
-    </div>
-  </header>
-</body>
-</html>
+      <footer>
+          <hr/>
+          <a href="index.php">home</a>
+          <a href="contact.php">contact</a>
+          <a href="faq.php">faq</a>
+          <a href="menu.php">menu</a>
+          <br>
+          <p>All site content is in the Public Domain.</p>
+          <p><small>Powered by <a href="https://github.com/blistakanjo604">github/blistakanjo604</a></small></p>
+      </footer>
+
+</body></html>
