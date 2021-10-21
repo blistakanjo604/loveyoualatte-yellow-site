@@ -12,5 +12,5 @@ $conn = new mysqli($dbServername, $dbUsername, $dbPassword);
 if ($conn->connect_error) {
   die("Database Connection Inactive: " . $conn->connect_error);
 }
-echo "<br> <br> Database Connection Active <br> <br>";
+// echo "<br> <br> Database Connection Active <br> <br>";
 ?>

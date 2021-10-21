@@ -33,8 +33,6 @@
 
 <center>
 <?php session_start();
-#cart.php - A simple shopping cart with add to cart, and remove links
-//---------------------------
 //initialize sessions
 //Define the products and cost
 // include_once 'db_connect.php';
@@ -101,7 +99,7 @@ if (isset($_GET["delete"])) {
     }
 }
 ?>
- <h2>List of All Products</h2>
+ <h2>Product Menu</h2>
  <table>
    <tr>
    <th>Product</th>
@@ -118,7 +116,7 @@ for ($i = 0;$i < count($products);$i++) {
    <td width="10px">&nbsp;</td>
    <td><?php echo($amounts[$i]); ?></td>
    <td width="10px">&nbsp;</td>
-   <td><a href="?add=<?php echo($i); ?>">Add to cart</a></td>
+   <td><a href="?add=<?php echo($i); ?>">add to cart</a></td>
    </tr>
    <?php
 }
@@ -127,13 +125,12 @@ for ($i = 0;$i < count($products);$i++) {
  <td colspan="5"></td>
  </tr>
  <tr>
- <td colspan="5"><a href="?reset=true">Reset Cart</a></td>
+ <td colspan="5"><a href="?reset=true">clear cart</a></td>
  </tr>
  </table>
  <?php
 if (isset($_SESSION["cart"])) {
     ?>
- <br/><br/><br/>
  <h2>Cart</h2>
  <table>
  <tr>
@@ -156,19 +153,23 @@ if (isset($_SESSION["cart"])) {
  <td width="10px">&nbsp;</td>
  <td><?php echo($_SESSION["amounts"][$i]); ?></td>
  <td width="10px">&nbsp;</td>
- <td><a href="?delete=<?php echo($i); ?>">Delete from cart</a></td>
+ <td><a href="?delete=<?php echo($i); ?>">remove item</a></td>
  </tr>
  <?php
         $total = $total + $_SESSION["amounts"][$i];
     }
     $_SESSION["total"] = $total; ?>
  <tr>
- <td colspan="7">Total : <?php echo($total); ?></td>
+ <!--td colspan="7">Total : <?php echo($total); ?></td-->
  </tr>
  </table>
  <?php
 }
 ?>
+
+<br>
+
+<a href="checkout.php">checkout</a>
 
 </center>
 
