@@ -154,7 +154,7 @@
                }
                $_SESSION["total"] = $total; ?>
             <tr>
-               <!--td colspan="7">Total : <?php echo($total); ?></td-->
+               <td colspan="7"><br>cart total : <?php echo($total); ?></br></td>
             </tr>
          </table>
          <?php
