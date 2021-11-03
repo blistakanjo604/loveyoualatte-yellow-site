@@ -59,7 +59,8 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/hamburger.css">
-      <title>Love you A Latte (Yellow 02 Capstone)</title>
+      <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
+      <title>☕ Products 🍵</title>
    </head>
    <body>
       <div class="menu-wrap">
@@ -100,7 +101,7 @@
             <div id="product-grid">
                <br>
                <div class="txt-heading">
-                  <h1>Products</h1>
+                  <h1>☕ Products 🍵</h1>
                </div>
                <?php
                   $product_array = $db_handle->runQuery("SELECT * FROM products ORDER BY id ASC");
@@ -125,7 +126,7 @@
             <!--Start Cart Display-->
             <div id="shopping-cart">
                <div class="txt-heading">
-                  <h1>Cart</h1>
+                  <h1>🛒 Cart 🛍</h1>
                </div>
                <?php
                   if(isset($_SESSION["cart_item"])){
@@ -151,7 +152,7 @@
                         <td style="text-align:center;"><?php echo $item["quantity"]; ?></td>
                         <td  style="text-align:center;"><?php echo "$ ".$item["price"]; ?></td>
                         <td  style="text-align:center;"><?php echo "$ ". number_format($item_price,2); ?></td>
-                        <td style="text-align:center;"><a href="menu.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction">remove</a></td>
+                        <td style="text-align:center;"><a href="menu.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction">❌</a></td>
                      </tr>
                      <?php
                         $total_quantity += $item["quantity"];

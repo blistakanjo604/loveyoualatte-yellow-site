@@ -9,7 +9,8 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/hamburger.css">
-      <title>Love you A Latte (Yellow 02 Capstone)</title>
+      <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
+      <title>☕ Love you A Latte 🍵</title>
    </head>
    <body>
       <div class="menu-wrap">
@@ -46,7 +47,7 @@
       </div>
       <header class="showcase">
          <div class="container showcase-inner">
-            <h1>Love you A Latte</h1>
+            <h1>☕ Love you A Latte 🍵</h1>
             <p>Click our menu button in the upper left of the screen, and  select where you would like to go.</p>
             <a href="index.php" class="btn">Home</a><br><br>
             <!-- Testing out Database Time Retrieval -->

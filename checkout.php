@@ -58,6 +58,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
       <link rel="stylesheet" href="css/hamburger.css">
       <title>Love you A Latte (Yellow 02 Capstone)</title>
    </head>
@@ -97,7 +98,7 @@
       <!-- Start Receipt Contents -->
       <header class="showcase">
          <div class="showcase-inner">
-            <h1>Receipt</h1>
+            <h1>🧾 Receipt 🧾</h1>
             <?php
                if(isset($_SESSION["cart_item"])){
                    $total_quantity = 0;

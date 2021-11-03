@@ -7,7 +7,8 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/hamburger.css">
-      <title>Love you A Latte (Yellow 02 Capstone)</title>
+      <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
+      <title>☕ Log-in 🍵</title>
    </head>
    <body>
       <div class="menu-wrap">
@@ -44,7 +45,7 @@
       </div>
       <header class="showcase">
          <div class="showcase-inner">
-            <h1>Employee Login</h1>
+            <h1>☕ L o g - i n 👤</h1>
             <form action=signin.php method="POST">
                <label for="username">Username</label>
                <input type="text" id="username" name="username"> <br>
@@ -69,9 +70,11 @@
                  if (mysqli_num_rows($result) > 0)
                  {
                      echo '<br>The username and password are correct 🤗<br>';
+                     echo '<br>Redirecting you to Homepage in 3 seconds… ⏲<br>';
                      $_SESSION['attempts'] = 0;
                      $_SESSION['logged'] = true;
                      $_SESSION['user'] = $username;
+                     header("Refresh:3; url=index.php");
 
                  }
                  else

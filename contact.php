@@ -8,8 +8,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
       <link rel="stylesheet" href="css/hamburger.css">
-      <title>Contact Us</title>
+      <title>☕ Contact Us 🍵</title>
    </head>
    <body>
       <div class="menu-wrap">
@@ -46,7 +47,7 @@
       </div>
       <header class="showcase">
          <div class="container showcase-inner">
-            <h1>Contact Us</h1>
+            <h1>📞 Contact Us 📲</h1>
             <ul class="no">
                <li>Primary Address</li>
                <li>4401 Livingston Avenue, OH</li>
