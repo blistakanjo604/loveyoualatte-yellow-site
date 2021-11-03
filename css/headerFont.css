@@ -1,3 +1,4 @@
+/* Old HeaderFont.css */
 body{
     background-color: #FFF;
     background-image: url(../img/love6.jpg);
@@ -30,6 +31,6 @@ div#cen {
     transform: translate(-50%, -50%);
     padding: 10px;
     }
-/* When we start puting other iamges in this will make them responsive(never geting bigger than it's max size, and shrinking to fit a smaller resolution so that the whole img can be seen ) 
+/* When we start puting other iamges in this will make them responsive(never geting bigger than it's max size, and shrinking to fit a smaller resolution so that the whole img can be seen )
 img {max-width: 100%;
   width: 1600px;}

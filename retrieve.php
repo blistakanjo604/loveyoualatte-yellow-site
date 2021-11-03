@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 echo "<br> <br> Database Connection Active <br> <br>";
 
-$query = "SELECT time FROM loveyoualatte.customer ORDER BY time DESC  LIMIT 1;";
+$query = "SELECT time FROM loveyoualatte.time_retrieve ORDER BY time DESC  LIMIT 1;";
 
 
 $result = $conn->query($query);

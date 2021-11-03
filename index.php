@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +22,9 @@
         <div>
           <ul> <!-- add pages/ once we clean up the sites directory  -->
             <li><a href="index.php">Home</a></li>
-            <li><a href="FAQ.php">FAQ</a></li>
-            <li><a href="ContactUs.php">Contact Us</a></li>
-	        <li><a href="product_menu.php">Product Menu</a></li>
+            <li><a href="faq.php">FAQ</a></li>
+            <li><a href="contact.php">Contact Us</a></li>
+	        <li><a href="menu.php">Product Menu</a></li>
           </ul>
         </div>
       </div>
@@ -44,7 +48,7 @@
 			<?php
                     // Dirty code just to get things working…
 
-                    include_once 'db_connect_index.php';
+                    include_once 'retrieve.php';
 
             ?>
     </div>
