@@ -3,7 +3,7 @@
    	private $host = "localhost";
    	private $user = "yellow";
    	private $password = "YellowTA@m-!02Server";
-   	private $database = "loveyoualatte";
+   	private $database = "testing";
    	private $conn;
 
    	function __construct() {
