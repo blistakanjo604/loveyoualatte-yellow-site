@@ -1,29 +1,30 @@
 <?php
+   include_once 'init_connect.php';
 
-$dbServername = "localhost";
-$dbUsername = "yellow";
-$dbPassword = "YellowTA@m-!02Server";
+   /* $first = $_POST['first'];
+   $last = $_POST['last'];
+   $phone = $_POST['phone'];           Old variabls for the old form
+   $email = $_POST['email']; */
 
+   $sql = "INSERT INTO `loveyoualatte`.`time_retrieve` (`faux`) VALUES ('faux');";
 
-// Initialize Connection
-$conn = new mysqli($dbServername, $dbUsername, $dbPassword);
+   echo(date("Y-m-d H:i:s"));
 
-// Check connection
-if ($conn->connect_error) {
-    die("Database Connection Inactive: " . $conn->connect_error);
-}
-echo "<br> <br> Database Connection Active <br> <br>";
+   if ($conn->query($sql) === true)
+   {
+       echo "<br><br>New record created successfully";
+   }
+   else
+   {
+       echo "Error: " . $sql . "<br>" . $conn->error;
+   }
 
-$query = "SELECT time FROM loveyoualatte.time_retrieve ORDER BY time DESC  LIMIT 1;";
+   $conn->close();
 
+   //  mysql_query($conn, $sql);
+   //  header("Location: ../index.php?signup=success");
 
-$result = $conn->query($query);
+   header("Location: index.php");
+   die();
 
-/* fetch associative array */
-echo "The last time 🥚 THE BUTTON 🥚 was pressed was on: <br><br>";
-
-while ($row = $result->fetch_assoc()) {
-    echo $row["time"];
-}
-
-$conn->close();
+   ?>

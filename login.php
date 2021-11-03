@@ -1,6 +1,4 @@
-<?php
-   session_start();
-   ?>
+<?php session_start(); unset($_SESSION['user']); $_SESSION['logged'] = false; ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -9,7 +7,7 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/hamburger.css">
-      <title>Contact Us</title>
+      <title>Love you A Latte (Yellow 02 Capstone)</title>
    </head>
    <body>
       <div class="menu-wrap">
@@ -45,18 +43,16 @@
          </div>
       </div>
       <header class="showcase">
-         <div class="container showcase-inner">
-            <h1>Contact Us</h1>
-            <ul class="no">
-               <li>Primary Address</li>
-               <li>4401 Livingston Avenue, OH</li>
-               <li>Phone: 614-008-5721</li>
-               <li>Email</li>
-               <a href = "mailto: yellowteam@loveyoualatte.com">
-                  yellowteam@loveyoualatte.com</a
-            </ul>
-            <h2>Got a question? We’d love to hear from you.</h2>
-            <a href="index.php" class="btn">Home</a><br><br>
+         <div class="showcase-inner">
+            <h1>Employee Login</h1>
+            <form action=signin.php method="POST">
+               <label for="username">Username</label>
+               <input type="text" id="username" name="username"> <br>
+               <label for="password">Password</label>
+               <input type="password" id="password" name="password"> <br>
+               <!--input type="Submit" name="submit" id="sub"-->
+               <button type="submit" name="submit">Log-in</button>
+            </form>
          </div>
       </header>
    </body>

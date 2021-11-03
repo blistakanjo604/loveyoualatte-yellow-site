@@ -272,6 +272,17 @@ h1 {
 	margin: 10px 0px;
 }
 
+#btnCheckOut {
+	background-color: #BBBBBB;
+	border: #11427E 1px solid;
+	padding: 5px 10px;
+	color: #11427E;
+	float: right;
+	text-decoration: none;
+	border-radius: 3px;
+	margin: 10px 0px;
+}
+
 .btnAddAction {
     padding: 5px 10px;
     margin-left: 5px;
@@ -353,4 +364,8 @@ h1 {
 	text-align: center;
 	clear: both;
 	margin: 38px 0px;
+}
+
+.menu-small {
+  color: #ffffff
 }
