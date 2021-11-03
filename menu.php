@@ -1,3 +1,56 @@
+<?php
+   session_start();
+   require_once("cart_connect.php");
+   $db_handle = new DBController();
+   if(!empty($_GET["action"])) {
+   switch($_GET["action"]) {
+   	case "add":
+   		if(!empty($_POST["quantity"])) {
+   			$productByCode = $db_handle->runQuery("SELECT * FROM products WHERE code='" . $_GET["code"] . "'");
+   		//	$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
+   		// ^^ Code above is the array that includes the image from database pull
+   			$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
+   			if(!empty($_SESSION["cart_item"])) {
+   				if(in_array($productByCode[0]["code"],array_keys($_SESSION["cart_item"]))) {
+   					foreach($_SESSION["cart_item"] as $k => $v) {
+   							if($productByCode[0]["code"] == $k) {
+   								if(empty($_SESSION["cart_item"][$k]["quantity"])) {
+   									$_SESSION["cart_item"][$k]["quantity"] = 0;
+   								}
+   								$_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
+   							}
+   					}
+   				} else {
+   					$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+   				}
+   			} else {
+   				$_SESSION["cart_item"] = $itemArray;
+   			}
+   		}
+   	break;
+   	case "remove":
+   		if(!empty($_SESSION["cart_item"])) {
+   			foreach($_SESSION["cart_item"] as $k => $v) {
+   					if($_GET["code"] == $k) {
+               if($_SESSION["cart_item"][$k]["quantity"] > 1) {
+                 $_SESSION["cart_item"][$k]["quantity"]--;
+               }
+               else {
+               unset($_SESSION["cart_item"][$k]);
+             }
+             }
+   					if(empty($_SESSION["cart_item"])) {
+   						unset($_SESSION["cart_item"]);
+             }
+   			}
+   		}
+   	break;
+   	case "empty":
+   		unset($_SESSION["cart_item"]);
+   	break;
+   }
+   }
+   ?>
 <!DOCTYPE html>
 <html lang=en>
    <head>
@@ -5,11 +58,12 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/style.css">
+      <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
       <title>☕ Love You A Latte 🍵</title>
       <meta name="description" content="Hello World! Only a simple coffee site (but respects your dark mode setting and has responsive web design). No ads, no tracking, nothing but basic coffee and good service.">
    </head>
    <body>
-      <div class=banner>
+      <div>
          <h1 class=forte>☕ Love You A Latte Menu 🍵</h1>
          <hr/>
       </div>
@@ -26,142 +80,102 @@
       <hr>
       <br><br>
       <center>
-         <?php session_start();
-            //initialize sessions
-            //Define the products and cost
-            // include_once 'db_connect.php';
-            $products = array(
-                "Cappuccino",
-                "Drip Coffee",
-                "Latte",
-                "Espresso",
-                "Machiato",
-                "Mocha"
-            );
-            $amounts = array(
-                "9.99",
-                "5.99",
-                "7.99",
-                "4.99",
-                "6.99",
-                "8.99"
-            );
-
-            //Load up session
-            if (!isset($_SESSION["total"])) {
-                $_SESSION["total"] = 0;
-                for ($i = 0;$i < count($products);$i++) {
-                    $_SESSION["qty"][$i] = 0;
-                    $_SESSION["amounts"][$i] = 0;
-                }
+         <!--Start Product List-->
+         <div>
+            <h2>Products</h2>
+            <table>
+               <tr>
+                  <th>&nbsp; Product &nbsp;</th>
+                  <th>&nbsp; Price &nbsp;</th>
+                  <th>&nbsp; Quantity &nbsp;</th>
+                  <th>&nbsp; Action &nbsp;</th>
+               </tr>
+               <?php
+                  $product_array = $db_handle->runQuery("SELECT * FROM products ORDER BY id ASC");
+                  if (!empty($product_array)) {
+                  	foreach($product_array as $key=>$value){
+                  ?>
+               <div>
+                  <form method="post" action="menu.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>">
+                     <!--div class="product-image"><img src="<!--?php echo $product_array[$key]["image"]; ?>"--><!--/div-->
+                     <tr>
+                        <td align=center><?php echo $product_array[$key]["name"]; ?></td>
+                        <td align=center><?php echo "$".$product_array[$key]["price"]; "  " ?></td>
+                        <td align=center><input type="text" class="center-block" name="quantity" value="1" size="2" /></td>
+                        <td align=center><input type="submit" value="Add to Cart" class="btnAddAction" /></td>
+                     </tr>
+               </div>
+               </form>
+         </div>
+         <?php
             }
-
-            //---------------------------
-            //Reset
-            if (isset($_GET['reset'])) {
-                if ($_GET["reset"] == 'true') {
-                    unset($_SESSION["qty"]); //The quantity for each product
-                    unset($_SESSION["amounts"]); //The amount from each product
-                    unset($_SESSION["total"]); //The total cost
-                    unset($_SESSION["cart"]); //Which item has been chosen
-                }
-            }
-
-            //---------------------------
-            //Add
-            if (isset($_GET["add"])) {
-                $i = $_GET["add"];
-                $qty = $_SESSION["qty"][$i] + 1;
-                $_SESSION["amounts"][$i] = $amounts[$i] * $qty;
-                $_SESSION["cart"][$i] = $i;
-                $_SESSION["qty"][$i] = $qty;
-            }
-
-            //---------------------------
-            //Delete
-            if (isset($_GET["delete"])) {
-                $i = $_GET["delete"];
-                $qty = $_SESSION["qty"][$i];
-                $qty--;
-                $_SESSION["qty"][$i] = $qty;
-                //remove item if quantity is zero
-                if ($qty == 0) {
-                    $_SESSION["amounts"][$i] = 0;
-                    unset($_SESSION["cart"][$i]);
-                } else {
-                    $_SESSION["amounts"][$i] = $amounts[$i] * $qty;
-                }
             }
             ?>
-         <h2>Product Menu</h2>
-         <table>
-            <tr>
-               <th>Product</th>
-               <th width="10px">&nbsp;</th>
-               <th>Amount</th>
-               <th width="10px">&nbsp;</th>
-               <th>Action</th>
-            </tr>
+         </table>
+         </div>
+         <!-- Start Cart Contents -->
+         <div>
+            <h2>Cart</h2>
             <?php
-               for ($i = 0;$i < count($products);$i++) {
-                   ?>
-            <tr>
-               <td><?php echo($products[$i]); ?></td>
-               <td width="10px">&nbsp;</td>
-               <td><?php echo($amounts[$i]); ?></td>
-               <td width="10px">&nbsp;</td>
-               <td><a href="?add=<?php echo($i); ?>">add to cart</a></td>
-            </tr>
+               if(isset($_SESSION["cart_item"])){
+                   $total_quantity = 0;
+                   $total_price = 0;
+               ?>
+            <table>
+               <tbody>
+                  <tr>
+                     <th>&nbsp; Product &nbsp;</th>
+                     <!--th style="text-align:left;">Code</th-->
+                     <th>&nbsp; Quantity &nbsp;</th>
+                     <th>&nbsp; Unit Price &nbsp;</th>
+                     <th>&nbsp; Price &nbsp;</th>
+                     <th>&nbsp; &nbsp; &nbsp; Action</th>
+                  </tr>
+                  <?php
+                     foreach ($_SESSION["cart_item"] as $item){
+                         $item_price = $item["quantity"]*$item["price"];
+                     ?>
+                  <tr>
+                     <!--td><img src="<!--?php echo $item["image"]; ?>" class="cart-item-image" /><!--?php echo $item["name"]; ?--><!--/td-->									 <!--Remove all comments in this line to make images work again-->
+                     <td align=center><?php echo $item["name"]; ?></td>
+                     <!--td><!--?php echo $item["code"]; ?--><!--/td-->
+                     <td align=center><?php echo $item["quantity"]; ?></td>
+                     <td align=center><?php echo "$".$item["price"]; ?></td>
+                     <td align=center><?php echo "$". number_format($item_price,2); ?></td>
+                     <td align=center>
+                        &nbsp;&nbsp;
+                        <a href="menu.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction">
+                           <!--img src="icon-delete.png" alt="Remove Item" /-->remove from cart
+                        </a>
+                     </td>
+                  </tr>
+                  <?php
+                     $total_quantity += $item["quantity"];
+                     $total_price += ($item["price"]*$item["quantity"]);
+                     }
+                     ?>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                     <td colspan="2" align="right">&nbsp;</td>
+                     <td align="right">Items: &nbsp;<?php echo $total_quantity; ?></td>
+                     <td align="right" colspan="2"><strong>Total: &nbsp;<?php echo "$".number_format($total_price, 2); ?></strong></td>
+                     <td></td>
+                  </tr>
+               </tbody>
+            </table>
+            <br>
+            <a href="checkout.php">checkout</a>
+            <br><br><a id="btnEmpty" href="menu.php?action=empty">clear cart</a>
+            <?php
+               } else {
+               ?>
+            <div>cart is empty</div>
             <?php
                }
                ?>
-            <tr>
-               <td colspan="5"></td>
-            </tr>
-            <tr>
-               <td colspan="5"><a href="?reset=true">clear cart</a></td>
-            </tr>
-         </table>
-         <?php
-            if (isset($_SESSION["cart"])) {
-                ?>
-         <h2>Cart</h2>
-         <table>
-            <tr>
-               <th>Product</th>
-               <th width="10px">&nbsp;</th>
-               <th>Qty</th>
-               <th width="10px">&nbsp;</th>
-               <th>Amount</th>
-               <th width="10px">&nbsp;</th>
-               <th>Action</th>
-            </tr>
-            <?php
-               $total = 0;
-               foreach ($_SESSION["cart"] as $i) {
-                   ?>
-            <tr>
-               <td><?php echo($products[$_SESSION["cart"][$i]]); ?></td>
-               <td width="10px">&nbsp;</td>
-               <td><?php echo($_SESSION["qty"][$i]); ?></td>
-               <td width="10px">&nbsp;</td>
-               <td><?php echo($_SESSION["amounts"][$i]); ?></td>
-               <td width="10px">&nbsp;</td>
-               <td><a href="?delete=<?php echo($i); ?>">remove item</a></td>
-            </tr>
-            <?php
-               $total = $total + $_SESSION["amounts"][$i];
-               }
-               $_SESSION["total"] = $total; ?>
-            <tr>
-               <td colspan="7"><br>cart total : <?php echo($total); ?></br></td>
-            </tr>
-         </table>
-         <?php
-            }
-            ?>
-         <br>
-         <a href="checkout.php">checkout</a>
+         </div>
       </center>
       <br><br><br>
       <footer>
@@ -173,7 +187,18 @@
          <br>
          <p>All site content is in the Public Domain.</p>
          <p><small>Powered by <a href="https://github.com/blistakanjo604">github/blistakanjo604</a></small></p>
-         <p><small>are you an employee? <a href="login.php">log-in!</a></small></p>
+         <?php
+         if($_SESSION['logged']==true)
+           {
+             echo '<p><small>User Logged in: ';
+             echo $_SESSION['user'];
+             echo ' <a href="login.php">log-out?</a></small></p>';
+           }
+         elseif($_SESSION['logged']==false)
+           {
+             echo '<p><small>are you an employee? <a href="login.php">log-in!</a></small></p>';
+           }
+         ?>
       </footer>
    </body>
 </html>

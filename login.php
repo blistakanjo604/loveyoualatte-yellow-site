@@ -1,3 +1,4 @@
+<?php session_start(); unset($_SESSION['user']); $_SESSION['logged'] = false; ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -5,6 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/style.css">
+      <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
       <title>☕ Love You A Latte 🍵</title>
       <meta name="description" content="Hello World! Only a simple coffee site (but respects your dark mode setting and has responsive web design). No ads, no tracking, nothing but basic coffee and good service.">
    </head>
@@ -47,6 +49,17 @@
    <br>
    <p>All site content is in the Public Domain.</p>
    <p><small>Powered by <a href="https://github.com/blistakanjo604">github/blistakanjo604</a></small></p>
-   <p><small>are you an employee? <a href="login.php">log-in!</a></small></p>
+   <?php
+   if($_SESSION['logged']==true)
+     {
+       echo '<p><small>User Logged in: ';
+       echo $_SESSION['user'];
+       echo ' <a href="login.php">log-out?</a></small></p>';
+     }
+   elseif($_SESSION['logged']==false)
+     {
+       echo '<p><small>are you an employee? <a href="login.php">log-in!</a></small></p>';
+     }
+   ?>
 </footer>
 </body></html>

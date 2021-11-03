@@ -100,3 +100,10 @@ div.centered {
 p.centered {
 	text-align: center;
 }
+
+input.center-block {
+	text-align: center;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
