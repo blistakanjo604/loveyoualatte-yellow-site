@@ -152,7 +152,7 @@
                         $item_price = $item["quantity"]*$item["price"];
                         ?>
                      <tr>
-                        <td><img src="<?php echo $item["image"]; ?>" class="cart-item-image" /><?php echo $item["name"]; ?></td>
+                        <td style="text-align:left;"><img src="<?php echo $item["image"]; ?>" class="cart-item-image" /><?php echo $item["name"]; ?></td>
                         <td style="text-align:center;"><?php echo $item["quantity"]; ?></td>
                         <td  style="text-align:center;"><?php echo "$ ".$item["price"]; ?></td>
                         <td  style="text-align:center;"><?php echo "$ ". number_format($item_price,2); ?></td>
