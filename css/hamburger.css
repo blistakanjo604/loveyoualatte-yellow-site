@@ -237,6 +237,36 @@ h1 {
 
 }
 
+/* Added the following lines for product menu page */
+
+.showcase-products {
+  background: var(--primary-color);
+  color: #fff;
+  height: auto;
+  position: relative;
+}
+
+.showcase-products:before {
+  content: '';
+  background: url(../img/love6.jpg) no-repeat center center/cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.showcase-products-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: fit-content;
+}
+
+
 
 /* Cart Styling */
 
@@ -246,6 +276,9 @@ h1 {
 
 #product-grid {
 	margin: 40px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 #shopping-cart table {
