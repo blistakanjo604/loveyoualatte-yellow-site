@@ -1,46 +1,26 @@
-# loveyoualatte-yellow-site
+# Possible Drink Sizes Implementation
 
-The connetion information is on the CreateDB.php file chagne this so that it can connect to our MySQL DB
-This branch is here to test if we can get the connection from the db to .shopping_cart.php to work. 
-The cart is desing to fetch the data for the products from the db instead of hard coding it into the site.
-Before you start you need to create the tables below follow these instuctions. 
-If you are unsure what directorty you should place the images in please follow the instructions bellow. 
-The 3 php files that we are test should be placed in the PHP folder inside of pages the path should be "/var/www/html/pages/php"
-They are as follows CreateDB.php, component.php, and header.php
+Note: I found this on [stackoverflow](https://stackoverflow.com/questions/39311174/storing-combinations-of-item-properties-in-database) . I already have a database connection set-up and the code is running good for the menu and cart system. This is built on top of the vide branch but we can probably port this over to our old site (master/bootstrap branches).
 
+ITST/Cybersecurity Team: I may need help with this implementation since I am not very good with database relationships.
 
+---
+### Start Stack Overflow Comment:
 
+Let try to reason how to solve your task. I will describe  **general conception**  and split it in some steps:
 
+1.  Define  **types of products**  that you are going to sell: cup, plate, pan and so on. Create table  `products`  with fields:  `id, name, price`.
+2.  Define  **colours of products**: black, red, brown. Create table  `products_colours`  with fields:  `id, name, price`.
+3.  Define  **sizes of products**: small, medium, large. Create table  `products_sizes`  with fields:  `id, name, price`.
+4.  In simple case all types of products will have  **the same price**  and will store in table products.
+5.  In simple case  **additional price for colours and sizes**  will be  **the same for all types of products**  and will be stored in tables  `products_colours`  and  `products_sizes`.
+6.  Create table  `customers_products`  with fields:  `id, products_id, products_colours_id, products_sizes_id, quantity`.
+7.  Write a query for join all table together to fetch all products with colours, sizes and all prices from db.
+8.  In the script iterates through all rows and calculate  **price**  for every product as a  **sum of product price, size price and colour price**.
 
+To sum up: this is very  **basic implementation**  that doesn't include things like brands, discounts and so on. However, it gives you understanding how to  **scale**  your system in case of adding additional attributes that affect the final price of products.
 
-Run this command first						CREATE TABLE Productdb
-                            (id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                             product_name VARCHAR (25) NOT NULL,
-                             product_price FLOAT,
-                             product_image VARCHAR (100)
-                            );
-                            
-						The above command is going to create the table "Productdb" with the listed columns and their data types
+### End Stack Overflow Comment
+---
+Post Note: Once we get this implemented we can probably change the html table (add a column) on the code to include a size drop-down and add sql queries to manipulate the sizes and prices of the drink
 
-Don't run this SQL command until you have the images in the img folder in the pages folder the path should look like this” \pages\img”.  						 
-
-INSERT INTO Productdb (product_name, product_price, product_image)
-        VALUES ('Cappuccino',9.99,'./img/cappuccino.jpeg'),
-                        ('Drip Coffee',5.99,'./img/drip_cof.jpeg'),
-                        ('Latte',7.99,'./img/lattea.jpeg'),
-                        ('Espresso',4.99,'./img/espresso.jpeg'),
-                         ('Macchiato',6.99,'./img/macchiato.jpeg'),
-                          ('Mocha',8.99,'./img/mocha.jpeg');
-						  
-						  
-							
-					We need to clean up the directory for a the site a little bite change the links to wahts below and place the files in the dirotory listed below		
-                 updated links Need to change for every page on the site
-							  <li><a href="index.php">Home</a></li>
-            <li><a href="pages/FAQ.php">FAQ</a></li>
-            <li><a href="pages/ContactUs.php">Contact Us</a></li>
-	        <li><a href="pages/products.php">Product Menu</a></li>
-            <li><a href="pages/form.php">Sign-up (Old Website)</a></li>
-            <li><a href="pages/shopping_cart.php">shopping cart</a></li>
-            
-            

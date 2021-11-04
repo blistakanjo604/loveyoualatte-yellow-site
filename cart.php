@@ -1,140 +1,166 @@
 <?php
+   session_start();
+   require_once("cart_connect.php");
+   $db_handle = new DBController();
+   if(!empty($_GET["action"])) {
+   switch($_GET["action"]) {
+   	case "add":
+   		if(!empty($_POST["quantity"])) {
+   			$productByCode = $db_handle->runQuery("SELECT * FROM gio_products WHERE code='" . $_GET["code"] . "'");
+   		$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
+   		// Code below is the array that does not include the image from database pull
+   		//	$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
+   			if(!empty($_SESSION["cart_item"])) {
+   				if(in_array($productByCode[0]["code"],array_keys($_SESSION["cart_item"]))) {
+   					foreach($_SESSION["cart_item"] as $k => $v) {
+   							if($productByCode[0]["code"] == $k) {
+   								if(empty($_SESSION["cart_item"][$k]["quantity"])) {
+   									$_SESSION["cart_item"][$k]["quantity"] = 0;
+   								}
+   								$_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
+   							}
+   					}
+   				} else {
+   					$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+   				}
+   			} else {
+   				$_SESSION["cart_item"] = $itemArray;
+   			}
+   		}
+   	break;
+   	case "remove":
+   		if(!empty($_SESSION["cart_item"])) {
+   			foreach($_SESSION["cart_item"] as $k => $v) {
+   					if($_GET["code"] == $k) {
+						/* v---This is the code that removes just one item from cart---v*/
+               if($_SESSION["cart_item"][$k]["quantity"] > 1) {
+                 $_SESSION["cart_item"][$k]["quantity"]--;
+               }
+               else {
+               unset($_SESSION["cart_item"][$k]);
+             }
+             }
+   					if(empty($_SESSION["cart_item"])) {
+   						unset($_SESSION["cart_item"]);
+             }
+   			}
+   		}
+   	break;
+   	case "empty":
+   		unset($_SESSION["cart_item"]);
+   	break;
+   }
+   }
+   ?>
 
-session_start();
 
-require_once ("db/CreateDb.php");
-require_once ("db/component.php");
-
-$db = new CreateDb("loveyoualatte", "Productdb");
-
-/*if (isset($_POST['remove'])){
-  if ($_GET['action'] == 'remove'){
-      foreach ($_SESSION['cart'] as $key => $value){
-          if($value["product_id"] == $_GET['id']){
-              unset($_SESSION['cart'][$key]);
-              echo "<script>alert('Product has been Removed...!')</script>";
-              echo "<script>window.location = 'cart.php'</script>";
-          }
-      }
-  }
-}*/
-
-if (isset($_POST['remove'])){
-  if ($_GET['action'] == 'remove'){
-      foreach ($_SESSION['cart'] as $key => $value){
-              unset($_SESSION['cart'][$key]);
-              echo "<script>alert('Cart has been cleared…!')</script>";
-              echo "<script>window.location = 'cart.php'</script>";
-      }
-  }
-}
-
-
-?>
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cart</title>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
-
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-light">
-
-<?php
-    require_once ('db/header.php');
-    require_once ("db/CreateDb.php");
-    require_once ("db/component.php");
-?>
-
-<div class="container-fluid">
-    <div class="row px-5">
-        <div class="col-md-7">
-            <div class="shopping-cart">
-                <h6>My Cart</h6>
-                <hr>
-
-                <?php
-
-                $total = 0;
-                    if (isset($_SESSION['cart'])){
-                        $product_id = array_column($_SESSION['cart'], 'product_id');
-
-                        $result = $db->getData();
-                        while ($row = mysqli_fetch_assoc($result)){
-                            foreach ($product_id as $id){
-                                if ($row['id'] == $id){
-                                    cartElement($row['product_image'], $row['product_name'],$row['product_price'], $row['id']);
-                                    $total = $total + (int)$row['product_price'];
-                                }
-                            }
-                        }
-                    }else{
-                        echo "<h5>Cart is Empty</h5>";
-                    }
-
-                ?>
-
-            </div>
-        </div>
-        <div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
-
-            <div class="pt-4">
-                <h6>PRICE DETAILS</h6>
-                <hr>
-                <div class="row price-details">
-                    <div class="col-md-6">
-                        <?php
-                            if (isset($_SESSION['cart'])){
-                                $count  = count($_SESSION['cart']);
-                                echo "<h6>Price ($count items)</h6>";
-                            }else{
-                                echo "<h6>Price (0 items)</h6>";
-                            }
+<!DOCTYPE html>
+<html lang=en>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <link rel="stylesheet" href="css/hamburger.css">
+      <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
+      <title>☕ Cart 🍵</title>
+   </head>
+   <body>
+      <div class="menu-wrap">
+         <input type="checkbox" class="toggler">
+         <div class="hamburger">
+            <div></div>
+         </div>
+         <div class="menu">
+            <div>
+               <div>
+                  <ul>
+                     <!-- add pages/ once we clean up the sites directory  -->
+                     <li><a href="index.php">Home</a></li>
+                     <li><a href="faq.php">FAQ</a></li>
+                     <li><a href="contact.php">Contact Us</a></li>
+                     <li><a href="menu.php">Product Menu</a></li>
+                     <?php
+                        if($_SESSION['logged']==true)
+                          {
+                            echo '<li><a href="login.php">Log-out</a></li>';
+                            echo '<small class="menu-small">User Logged in: ';
+                            echo $_SESSION['user'];
+                            echo ' ☕ </small>';
+                          }
+                        elseif($_SESSION['logged']==false)
+                          {
+                            echo '<li><a href="login.php">Log-in</a></p>';
+                          }
                         ?>
-                        <h6>Delivery Charges</h6>
-                        <hr>
-                        <h6>Amount Payable</h6>
-                    </div>
-                      
-                    <div class="col-md-6">
-                        <h6>$<?php echo $total; ?></h6>
-                        <h6 class="text-success">FREE</h6>
-                        <hr>
-                        <h6>$<?php
-                            echo $total;
-                            ?></h6>
-                    </div>
-                    
-                    <form action="cart.php?action=remove" method="post" class="cart-items">
-                            <div class="col-md-6">
-                                <!--button type="submit" class="btn btn-warning\">Save for Later</button-->
-                                <button type="submit" class="btn btn-danger mx-2" name="remove">Clear Cart</button>
-                            </div>
-                </form> 
-                
-                
-                </div>
+                  </ul>
+               </div>
             </div>
-
-        </div>
-    </div>
-</div>
+         </div>
+      </div>
 
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
+<!--Start Cart Display-->
+<header class="showcase">
+  <div class="showcase-inner">
+            <div id="shopping-cart">
+               <div class="txt-heading">
+                  <h1>🛒 Cart 🛍</h1>
+               </div>
+               <?php
+                  if(isset($_SESSION["cart_item"])){
+                  $total_quantity = 0;
+                  $total_price = 0;
+                  ?>
+               <table class="tbl-cart" cellpadding="10" cellspacing="1">
+                  <tbody>
+                     <tr>
+                        <th>&nbsp; Product &nbsp;</th>
+                        <!--th style="text-align:left;">Code</th-->
+                        <th>&nbsp; Quantity &nbsp;</th>
+                        <th>&nbsp; Unit Price &nbsp;</th>
+                        <th>&nbsp; Price &nbsp;</th>
+                        <th>&nbsp; &nbsp; &nbsp; Action &nbsp; &nbsp;</th>
+                     </tr>
+                     <?php
+                        foreach ($_SESSION["cart_item"] as $item){
+                        $item_price = $item["quantity"]*$item["price"];
+                        ?>
+                     <tr>
+                        <td><img src="<?php echo $item["image"]; ?>" class="cart-item-image" /><?php echo $item["name"]; ?></td>
+                        <td style="text-align:center;"><?php echo $item["quantity"]; ?></td>
+                        <td  style="text-align:center;"><?php echo "$ ".$item["price"]; ?></td>
+                        <td  style="text-align:center;"><?php echo "$ ". number_format($item_price,2); ?></td>
+                        <td style="text-align:center;"><a href="cart.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction">❌</a></td>
+                     </tr>
+                     <?php
+                        $total_quantity += $item["quantity"];
+                        $total_price += ($item["price"]*$item["quantity"]);
+                        $_SESSION['cart_count'] = $total_quantity;
+                        }
+                        ?>
+                     <tr>
+                        <td colspan="2" align="right">Total:</td>
+                        <td align="right"><?php echo $total_quantity; ?></td>
+                        <td align="right" colspan="2"><strong><?php echo "$ ".number_format($total_price, 2); ?></strong></td>
+                        <td></td>
+                     </tr>
+                  </tbody>
+               </table>
+               <br>
+               <a id="btnCheckOut" href="menu.php">Go Back to Products</a>
+               <a id="btnCheckOut" href="checkout.php">Check-out</a>
+               <a id="btnEmpty" href="cart.php?action=empty">Clear Cart</a>
+               <?php
+                  } else {
+                  ?>
+               <div class="no-records">Your Cart is Empty</div>
+               <a id="btnCheckOut" href="menu.php">Go Back to Products</a>
+               <?php
+                  }
+                  ?>
+            </div>
+         </div>
+      </header>
+   </body>
 </html>
