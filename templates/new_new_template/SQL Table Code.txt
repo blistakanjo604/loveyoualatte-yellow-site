@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS `product` (
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(100) NOT NULL,
+  `product_price` varchar(50) NOT NULL,
+  `product_image` varchar(255) NOT NULL,
+  `product_code` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `product` (`product_id`, `product_name`, `product_price`, `product_image`, `product_code`) VALUES
+(1, &#39;bracelet&#39;, &#39;200&#39;, &#39;bracelet.png&#39;, &#39;p1000&#39;),
+(2, &#39;scating&#39;, &#39;500&#39;, &#39;scating.jpg&#39;, &#39;p1001&#39;),
+(3, &#39;men-fotware&#39;, &#39;250&#39;, &#39;men-fotware.jpg&#39;, &#39;p1002&#39;),
+(4, &#39;sunglass&#39;, &#39;100&#39;, &#39;sunglass.png&#39;, &#39;p1003&#39;),
+(5, &#39;shirt&#39;, &#39;400&#39;, &#39;shirt.jpg&#39;, &#39;p1004&#39;),
+(6, &#39;women-fotware&#39;, &#39;700&#39;, &#39;women-fotware.jpg&#39;, &#39;p1005&#39;);

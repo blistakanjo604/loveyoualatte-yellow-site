@@ -98,7 +98,14 @@
       <!-- Start Receipt Contents -->
       <header class="showcase">
          <div class="showcase-inner">
-            <h1>🧾 Receipt 🧾</h1>
+           <div id="shopping-cart">
+              <div class="txt-heading">
+                 <h1>🧾 Receipt 🧾</h1>
+                 <h3>Receipt Number: <?php echo rand(1, 1000000); ?>
+                 <h4><?php date_default_timezone_set("America/New_York"); echo date("Y-m-d h:i:sa"); ?></h4>
+              </div>
+			<br>
+			<br>
             <?php
                if(isset($_SESSION["cart_item"])){
                    $total_quantity = 0;
@@ -110,8 +117,8 @@
                      <th>&nbsp; Product &nbsp;</th>
                      <!--th style="text-align:left;">Code</th-->
                      <th>&nbsp; Quantity &nbsp;</th>
-                     <th>&nbsp; Unit Price &nbsp;</th>
-                     <th>&nbsp; Price</th>
+                     <th>&nbsp; Item Price &nbsp;</th>
+                     <th>&nbsp; Subtotal</th>
                   </tr>
                   <?php
                      foreach ($_SESSION["cart_item"] as $item){
@@ -141,7 +148,10 @@
                   </tr>
                </tbody>
             </table>
-            <br><br><a id="btnCheckOut" href="menu.php?action=empty">Pay in Full</a>
+            <br>
+			      <a id="btnCheckOut" href="menu.php">Go Back to Products</a>
+            <a id="btnCheckOut" href="cart.php">Go Back to Cart</a>
+			      <a id="btnCheckOut" href="menu.php?action=empty">Pay in Full</a>
             <?php
                } else {
                ?>
@@ -150,7 +160,7 @@
                }
                ?>
          </div>
-         </center>
+       </div>
       </header>
    </body>
 </html>

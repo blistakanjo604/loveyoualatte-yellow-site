@@ -108,7 +108,7 @@
                   <h1>☕ Products 🍵</h1>
                </div>
                <?php
-                  $product_array = $db_handle->runQuery("SELECT * FROM kyle_products ORDER BY id ASC");
+               $product_array = $db_handle->runQuery("SELECT * FROM kyle_products ORDER BY id ASC");
                   if (!empty($product_array)) {
                     foreach($product_array as $key=>$value){
                   ?>
@@ -128,61 +128,10 @@
                   ?>
             </div>
             <!--Start Cart Display-->
-            <div id="shopping-cart">
-               <div class="txt-heading">
-                  <h1>🛒 Cart 🛍</h1>
-               </div>
-               <?php
-                  if(isset($_SESSION["cart_item"])){
-                  $total_quantity = 0;
-                  $total_price = 0;
-                  ?>
-               <table class="tbl-cart" cellpadding="10" cellspacing="1">
-                  <tbody>
-                     <tr>
-                        <th>&nbsp; Product &nbsp;</th>
-                        <!--th style="text-align:left;">Code</th-->
-                        <th>&nbsp; Quantity &nbsp;</th>
-                        <th>&nbsp; Unit Price &nbsp;</th>
-                        <th>&nbsp; Price &nbsp;</th>
-                        <th>&nbsp; &nbsp; &nbsp; Action &nbsp; &nbsp;</th>
-                     </tr>
-                     <?php
-                        foreach ($_SESSION["cart_item"] as $item){
-                        $item_price = $item["quantity"]*$item["price"];
-                        ?>
-                     <tr>
-                        <td style="text-align:left;"><img src="<?php echo $item["image"]; ?>" class="cart-item-image" /><?php echo $item["name"]; ?></td>
-                        <td style="text-align:center;"><?php echo $item["quantity"]; ?></td>
-                        <td  style="text-align:center;"><?php echo "$ ".$item["price"]; ?></td>
-                        <td  style="text-align:center;"><?php echo "$ ". number_format($item_price,2); ?></td>
-                        <td style="text-align:center;"><a href="menu.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction">❌</a></td>
-                     </tr>
-                     <?php
-                        $total_quantity += $item["quantity"];
-                        $total_price += ($item["price"]*$item["quantity"]);
-                        }
-                        ?>
-                     <tr>
-                        <td colspan="2" align="right">Total:</td>
-                        <td align="right"><?php echo $total_quantity; ?></td>
-                        <td align="right" colspan="2"><strong><?php echo "$ ".number_format($total_price, 2); ?></strong></td>
-                        <td></td>
-                     </tr>
-                  </tbody>
-               </table>
-               <br>
-               <a id="btnCheckOut" href="checkout.php">Check-out</a>
-               <a id="btnEmpty" href="menu.php?action=empty">Clear Cart</a>
-               <?php
-                  } else {
-                  ?>
-               <div class="no-records">Your Cart is Empty</div>
-               <?php
-                  }
-                  ?>
+               <a id="btnCheckOut" href="cart.php">View Cart</a>
             </div>
          </div>
+         <br><br>
       </header>
    </body>
 </html>
