@@ -2,31 +2,34 @@
     include'pdoDB_connect.php';
     session_start();
     
-    //This will search for the name of the product
-    //
+    //This will add a new product to the table
+    //Insert statement needs to be debugged 
     if(isset($_POST['btnsave'])){
 
-        //$id = $_POST['id'];
-        $name = $_POST["txtname"];
-        $price = $_POST["txtprice"];
-        $image = $_POST["image"];
-        $desc = $_POST["item_desc"];
+        
+        $name = $_POST['txtname'];
+        $code = $_POST['code'];
+        $price = $_POST['txtprice'];
+        $image = $_POST['image'];
+        $desc = $_POST['item_desc'];
         
 
-    if(!empty($name && $price && $image && $$desc)){
-
+    if(!empty($name && $code && $price && $image && $desc)){
+    //Insert fails
+    //Tried removing the primary key since it 
     $insert = $pdo->prepare("INSERT  INTO 
-     sir_inventory(name,price,image,desc) 
-     VALUES(:name,:price,:image,:desc)");
+     sir_inventory(name,code,price,image,desc) 
+     VALUES(:name,:code,:price,:image,:desc)");
 
-    //$insert->bindParam(':id',$id);
+    
     $insert->bindParam(':name',$name);
+    $insert->bindParam(':code',$code);
     $insert->bindParam(':price',$price);
     $insert->bindParam(':image',$image);
     $insert->bindParam(':desc',$desc);
-    $insert->bindParam(':code',$code);
-    $insert->execute();
 
+    $insert->execute();
+   
     if($insert->rowCount()){
 
         echo'Insert successfull';
@@ -45,23 +48,26 @@
  //Conditions for update btn
  if(isset($_POST['btnupdate'])){
 
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $price = $_POST['price'];
+    
+       
+    $name = $_POST['txtname'];
+    $code = $_POST['code'];
+    $price = $_POST['txtprice'];
     $image = $_POST['image'];
     $desc = $_POST['item_desc'];
-    $code = $_POST['code'];
+    $id = $_POST['id'];
 
-    if(!empty($name && $price && $image && $desc && $code)){
+    if(!empty($name && $code && $price && $image && $desc)){
 
         $update = $pdo->prepare("update sir_inventory SET
-        name=:name,price=:price,image=:image,desc=:item_desc where code=:code");
+        name=:name,code=:code,price=:price,image=:image,desc=:desc where id=".$id);
 
-        $update->bindParam(':id',$id);
         $update->bindParam(':name',$name);
+        $update->bindParam(':code',$code);
         $update->bindParam(':price',$price);
         $update->bindParam(':image',$image);
         $update->bindParam(':desc',$desc);
+
 
         $update->execute();
 
@@ -70,7 +76,7 @@
             echo'Data Updated';
         }else{
 
-            echo'HAHA, Try again Kid(The update failed)';
+            echo'Try again Kid(The update failed)';
         }
 
     }else{
@@ -99,11 +105,12 @@
         <form action="" method="post">
 
     <?php
-
+    //Once you press Edit in the table the Save btn 
+    //will become the Update btn
     if(isset($_POST['btnedit'])){
 
         $select = $pdo->prepare("select * from sir_inventory 
-        where code=".$_POST['btnedit']);
+        where id=".$_POST['btnedit']);
 
         $select->execute();
 
@@ -112,12 +119,13 @@
 
 
         echo'
-        <p><input type="text" name="id" value="'.$row->id.'"></p>
+        
         <p><input type="text" name="txtname" value="'.$row->name.'"></p>
         <p><input type="text" name="code" value="'.$row->code.'"></p>
         <p><input type="text" name="txtprice" value="'.$row->price.'"></p> 
-        <p><input type="url"id="link" name="image" value="'.$row->image.'"></p>
+        <p><input type="text"id="link" name="image" value="'.$row->image.'"></p>
         <p><input type="text" name="item_desc" value="'.$row->desc.'"></p>
+        <p><input type="hidden" name="id" value="'.$row->id.'"></p>
         <button type="submit" name="btnupdate">Update</button>
         <button type="submit" name="btncancel">Cancel</button>
         
@@ -129,11 +137,13 @@
 
         echo'
 
-        <p><input type="text" name="id" placeholder="id"></p>
+        
         <p><input type="text" name="txtname"placeholder="Drink Name"></p>
+        <p><input type="text" name="code" placeholder="p1019"></p>
         <p><input type="number" step="0.01" name="txtprice" placeholder="$0.00"></p>
-    <p><input type="url"id="link" name="image_link" placeholder="https://drive.google.com/drive/folders/1FzcoeK_PwqGCGqmL7OdlxBTIv8Ieqbp6?usp=sharing "></p>
+        <p><input type="text"id="link" name="image" placeholder="https://drive.google.com/drive/folders/1FzcoeK_PwqGCGqmL7OdlxBTIv8Ieqbp6?usp=sharing"></p>
         <p><input type="text" name="item_desc" placeholder="Drink desc"></p>
+        <p><input type="hidden" name="id"></p>
         <input type="submit" value="Save" name="btnsave">
 
         ';
@@ -148,8 +158,9 @@
     <thead>
         <th>ID  </th>
         <th>Name</th>
+        <th>Item Code</th>
         <th>Price </th>
-        <th>Image</th>
+        <th>Image</th> 
         <th>Item description</th>
         <th>Edit </th>
         <th>Delete </th>
@@ -170,11 +181,12 @@ while($row = $select->fetch(PDO::FETCH_OBJ)){
     <tr>
     <td>'.$row->id.'</td>
     <td>'.$row->name.'</td>
+    <td>'.$row->$code.'</td>
     <td>'.$row->price.'</td>
     <td>'.$row->image.'</td>
     <td>'.$row->desc.'</td>
-    <td><button type="submit" value="'.$row->id.'">Edit</button</td>
-    <td><button type="submit" value="'.$row->id.'">Delete</button</td>
+    <td><button type="submit" value="'.$row->id.'" name="btnedit">Edit</button</td>
+    <td><button type="submit" value="'.$row->id.'" name="btndel">Delete</button</td>
     
     </tr>
     
