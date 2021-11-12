@@ -1,12 +1,12 @@
 <?php
    session_start();
-   require_once("cart_connect.php");
+   require_once("includes/cart_connect.php");
    $db_handle = new DBController();
    if(!empty($_GET["action"])) {
    switch($_GET["action"]) {
    	case "add":
    		if(!empty($_POST["quantity"])) {
-   			$productByCode = $db_handle->runQuery("SELECT * FROM gio_products WHERE code='" . $_GET["code"] . "'");
+   			$productByCode = $db_handle->runQuery("SELECT * FROM kyle_products WHERE code='" . $_GET["code"] . "'");
    		$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
    		// Code below is the array that does not include the image from database pull
    		//	$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
@@ -66,38 +66,7 @@
       <title>☕ Cart 🍵</title>
    </head>
    <body>
-      <div class="menu-wrap">
-         <input type="checkbox" class="toggler">
-         <div class="hamburger">
-            <div></div>
-         </div>
-         <div class="menu">
-            <div>
-               <div>
-                  <ul>
-                     <!-- add pages/ once we clean up the sites directory  -->
-                     <li><a href="index.php">Home</a></li>
-                     <li><a href="faq.php">FAQ</a></li>
-                     <li><a href="contact.php">Contact Us</a></li>
-                     <li><a href="menu.php">Product Menu</a></li>
-                     <?php
-                        if($_SESSION['logged']==true)
-                          {
-                            echo '<li><a href="login.php">Log-out</a></li>';
-                            echo '<small class="menu-small">User Logged in: ';
-                            echo $_SESSION['user'];
-                            echo ' ☕ </small>';
-                          }
-                        elseif($_SESSION['logged']==false)
-                          {
-                            echo '<li><a href="login.php">Log-in</a></p>';
-                          }
-                        ?>
-                  </ul>
-               </div>
-            </div>
-         </div>
-      </div>
+     <?php include 'includes/hamburger.php' ?>
 
 
 <!--Start Cart Display-->
@@ -127,7 +96,7 @@
                         $item_price = $item["quantity"]*$item["price"];
                         ?>
                      <tr>
-                        <td><img src="<?php echo $item["image"]; ?>" class="cart-item-image" /><?php echo $item["name"]; ?></td>
+                        <td style="text-align:left;"><img src="<?php echo $item["image"]; ?>" class="cart-item-image" /><?php echo $item["name"]; ?></td>
                         <td style="text-align:center;"><?php echo $item["quantity"]; ?></td>
                         <td  style="text-align:center;"><?php echo "$ ".$item["price"]; ?></td>
                         <td  style="text-align:center;"><?php echo "$ ". number_format($item_price,2); ?></td>
