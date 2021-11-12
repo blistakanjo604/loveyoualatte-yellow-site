@@ -76,7 +76,7 @@
             <br><br><br>
             <h1>📥 Inventory Management 📤</h1>
             <form action="inventory_management.php" method="post">
-              <button id=btnCheckOut type="submit" name="btnsearch">Search of an Item</button>
+              <button id=btnCheckOut type="submit" name="btnsearch">Search for an Item</button>
                <button id=btnCheckOut type="submit" name="btndelete">Delete Item</button>
                <button id=btnCheckOut type="submit" name="btnupdate">Update Item</button>
                <button id=btnCheckOut type="submit" name="btnadd">Add Item</button>
