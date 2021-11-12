@@ -15,8 +15,7 @@
                <?php
                   if($_SESSION['logged']==true)
                     {
-                      echo '<li><a href="add_products.php">Add Item</a></li>';
-                      echo '<li><a href="update_products.php">Update Item</a></li>';
+                      echo '<li><a href="inventory_management.php">Inventory</a></li>';
                       echo '<li><a href="login.php">Log-out</a></li>';
                       echo '<small class="menu-small">User Logged in: ';
                       echo $_SESSION['user'];
