@@ -377,7 +377,7 @@
                         <td align=center><?php echo $product_array[$key]["name"]; ?></td>
                         <td align=center><?php echo $product_array[$key]["code"]; ?></td>
                         <td align=center><?php echo "$".$product_array[$key]["price"]; "  " ?></td>
-                        <td align=center><?php echo .$product_array[$key]["image"]; "  " ?></td>
+                        <td align=center><?php echo $product_array[$key]["image"]; "  " ?></td>
                         <td align=center style="overflow: scroll; width:30%;"><?php echo $product_array[$key]["desc"]; ?></td>
                      </tr>
                </div>
