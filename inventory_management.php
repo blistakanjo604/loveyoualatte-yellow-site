@@ -129,7 +129,7 @@
                 if(isset($_POST['btnupdate']))
                 {
                   echo '<h3>Update an item</h3>';
-                  echo 'Please input the CODE of the product that you want to change';
+                  echo 'Please enter the CODE of the product that you want to change';
                   echo '
 
                   <br>
@@ -183,7 +183,7 @@
                  if(isset($_POST['btndelete']))
                  {
                    echo '<h3>Delete an item</h3>';
-                   echo 'Please input the CODE of the product that you want to delete';
+                   echo 'Please enter the CODE of the product that you want to delete';
                    echo '
 
                    <form class="" action="inventory_management.php" method="post">
