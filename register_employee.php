@@ -12,7 +12,7 @@ if ($_SESSION['logged'] != true) {
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/hamburger.css">
       <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
-      <title>☕ Sign-up 🍵</title>
+      <title>🚪 Register Employee 👤</title>
    </head>
    <body>
      <?php include 'includes/hamburger.php' ?>
