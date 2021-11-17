@@ -1,5 +1,5 @@
 <?php
-   include_once 'init_connect.php';
+   include_once 'includes/init_connect.php';
 
    /* $first = $_POST['first'];
    $last = $_POST['last'];
