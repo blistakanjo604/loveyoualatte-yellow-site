@@ -11,7 +11,7 @@
       <title>☕ Log-in 🍵</title>
    </head>
    <body>
-     <?php include 'includes/hamburger.php' ?>
+      <?php include 'includes/hamburger.php' ?>
       <header class="showcase">
          <div class="showcase-inner">
             <h1>☕ L o g - i n 👤</h1>
@@ -30,30 +30,39 @@
                $username = $_POST['username'];
                $password = $_POST['password'];
 
-               $result = $conn->query("SELECT * FROM loveyoualatte.employeelogin WHERE username = '$username' AND password = '$password';");
+               $statement = $conn->prepare("SELECT * FROM testing.kyle_accounts WHERE username = ?");
+               $statement->bind_param("s", $username);
+               $statement->execute();
+               $findUser = $statement->get_result()->fetch_assoc();
+
+
+
+                // $result = $conn->query("SELECT * FROM testing.kyle_accounts WHERE username = '$username' AND password = '$password';");
 
 
 
                if ($_SESSION['attempts'] < 2) // Less than 2 because it starts the count from 0
                {
-                 if (mysqli_num_rows($result) > 0)
-                 {
+
+                   if ($findUser && password_verify($password, $findUser['password']))
+                     {
                      echo '<br>The username and password are correct 🤗<br>';
                      echo '<br>Redirecting you to Homepage in 3 seconds… ⏲<br>';
                      $_SESSION['attempts'] = 0;
                      $_SESSION['logged'] = true;
                      $_SESSION['user'] = $username;
                      header("Refresh:3; url=index.php");
+                     }
 
-                 }
-                 else
-                 {
+                     else {
                      echo '<br><h2>The username or password are incorrect!</h2>';
                      $_SESSION['attempts']++;
                      echo '<h4>Login Attempts: ';
                      echo $_SESSION['attempts'];
                      echo '</h4>';
-                 }
+                     }
+
+
 
                }
 
