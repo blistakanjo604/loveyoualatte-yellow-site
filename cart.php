@@ -4,35 +4,60 @@
    $db_handle = new DBController();
    if(!empty($_GET["action"])) {
    switch($_GET["action"]) {
-   	case "add":
-   		if(!empty($_POST["quantity"])) {
-   			$productByCode = $db_handle->runQuery("SELECT * FROM kyle_products WHERE code='" . $_GET["code"] . "'");
-   		$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
-   		// Code below is the array that does not include the image from database pull
-   		//	$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
-   			if(!empty($_SESSION["cart_item"])) {
-   				if(in_array($productByCode[0]["code"],array_keys($_SESSION["cart_item"]))) {
-   					foreach($_SESSION["cart_item"] as $k => $v) {
-   							if($productByCode[0]["code"] == $k) {
-   								if(empty($_SESSION["cart_item"][$k]["quantity"])) {
-   									$_SESSION["cart_item"][$k]["quantity"] = 0;
-   								}
-   								$_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
-   							}
-   					}
-   				} else {
-   					$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
-   				}
-   			} else {
-   				$_SESSION["cart_item"] = $itemArray;
-   			}
-   		}
-   	break;
-   	case "remove":
-   		if(!empty($_SESSION["cart_item"])) {
-   			foreach($_SESSION["cart_item"] as $k => $v) {
-   					if($_GET["code"] == $k) {
-						/* v---This is the code that removes just one item from cart---v*/
+    case "add":
+      if(!empty($_POST["quantity"])) {
+        $productByCode = $db_handle->runQuery("SELECT * FROM (SELECT * FROM kyle_products UNION SELECT * FROM kyle_products_mods) AS U WHERE U.code='" . $_GET["code"] . "'");
+      $itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
+      // Code below is the array that does not include the image from database pull
+      //	$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
+        if(!empty($_SESSION["cart_item"])) {
+          if(in_array($productByCode[0]["code"],array_keys($_SESSION["cart_item"]))) {
+            foreach($_SESSION["cart_item"] as $k => $v) {
+                if($productByCode[0]["code"] == $k) {
+                  if(empty($_SESSION["cart_item"][$k]["quantity"])) {
+                    $_SESSION["cart_item"][$k]["quantity"] = 0;
+                  }
+                  $_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
+                }
+            }
+          } else {
+            $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+          }
+        } else {
+          $_SESSION["cart_item"] = $itemArray;
+        }
+      }
+    $_POST['ModPrompt'] = 1;
+    break;
+    case "addFromMod":
+    if(!empty($_POST["quantity"])) {
+      $productByCode = $db_handle->runQuery("SELECT * FROM (SELECT * FROM kyle_products UNION SELECT * FROM kyle_products_mods) AS U WHERE U.code='" . $_GET["code"] . "'");
+    $itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
+    // Code below is the array that does not include the image from database pull
+    //	$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
+      if(!empty($_SESSION["cart_item"])) {
+        if(in_array($productByCode[0]["code"],array_keys($_SESSION["cart_item"]))) {
+          foreach($_SESSION["cart_item"] as $k => $v) {
+              if($productByCode[0]["code"] == $k) {
+                if(empty($_SESSION["cart_item"][$k]["quantity"])) {
+                  $_SESSION["cart_item"][$k]["quantity"] = 0;
+                }
+                $_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
+              }
+          }
+        } else {
+          $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+        }
+      } else {
+        $_SESSION["cart_item"] = $itemArray;
+      }
+    }
+   break;
+    case "remove":
+      if(!empty($_SESSION["cart_item"])) {
+        foreach($_SESSION["cart_item"] as $k => $v) {
+            if($_GET["code"] == $k) {
+        /* v---This is the code that removes just one item from cart---v*/
                if($_SESSION["cart_item"][$k]["quantity"] > 1) {
                  $_SESSION["cart_item"][$k]["quantity"]--;
                }
@@ -40,20 +65,18 @@
                unset($_SESSION["cart_item"][$k]);
              }
              }
-   					if(empty($_SESSION["cart_item"])) {
-   						unset($_SESSION["cart_item"]);
+            if(empty($_SESSION["cart_item"])) {
+              unset($_SESSION["cart_item"]);
              }
-   			}
-   		}
-   	break;
-   	case "empty":
-   		unset($_SESSION["cart_item"]);
-   	break;
+        }
+      }
+    break;
+    case "empty":
+      unset($_SESSION["cart_item"]);
+    break;
    }
    }
-   ?>
-
-
+      ?>
 <!DOCTYPE html>
 <html lang=en>
    <head>
@@ -66,12 +89,10 @@
       <title>☕ Cart 🍵</title>
    </head>
    <body>
-     <?php include 'includes/hamburger.php' ?>
-
-
-<!--Start Cart Display-->
-<header class="showcase">
-  <div class="showcase-inner">
+      <?php include 'includes/hamburger.php' ?>
+      <!--Start Cart Display-->
+      <header class="showcase">
+         <div class="showcase-inner">
             <div id="shopping-cart">
                <div class="txt-heading">
                   <h1>🛒 Cart 🛍</h1>
