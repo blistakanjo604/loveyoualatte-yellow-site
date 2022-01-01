@@ -1,0 +1,36 @@
+/* Old HeaderFont.css */
+body{
+    background-color: #FFF;
+    background-image: url(../img/love6.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #FFF;
+    width: 100%;
+    height: 100%;
+}
+header{
+    font-family: 'Forte', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 56px;
+    padding:10px;
+
+}
+
+div#cen {
+    width: 1000px;
+    margin:0 auto;
+	padding: 20px;
+}
+
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    }
+/* When we start puting other iamges in this will make them responsive(never geting bigger than it's max size, and shrinking to fit a smaller resolution so that the whole img can be seen )
+img {max-width: 100%;
+  width: 1600px;}
