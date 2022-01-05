@@ -8,14 +8,14 @@
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/hamburger.css">
       <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
-      <title>☕ Log-in 🍵</title>
+      <title>☕ User Login 🍵</title>
    </head>
    <body>
      <?php include 'includes/hamburger.php' ?>
       <header class="showcase">
          <div class="showcase-inner">
-            <h1>☕ L o g - i n 👤</h1>
-            <form action=signin.php method="POST">
+            <h1>☕ User Login 👤</h1>
+            <form action=user_signin.php method="POST">
                <label for="username">Username</label>
                <input type="text" id="username" name="username"> <br>
                <label for="password">Password</label>

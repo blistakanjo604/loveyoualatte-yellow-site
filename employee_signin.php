@@ -11,11 +11,11 @@
       <title>☕ Log-in 🍵</title>
    </head>
    <body>
-      <?php include 'includes/hamburger.php' ?>
+     <?php include 'includes/hamburger.php' ?>
       <header class="showcase">
          <div class="showcase-inner">
-            <h1>☕ L o g - i n 👤</h1>
-            <form action=signin.php method="POST">
+            <h1>☕ Employee Login 👤</h1>
+            <form action=employee_signin.php method="POST">
                <label for="username">Username</label>
                <input type="text" id="username" name="username"> <br>
                <label for="password">Password</label>
@@ -36,33 +36,27 @@
                $findUser = $statement->get_result()->fetch_assoc();
 
 
-
-                // $result = $conn->query("SELECT * FROM testing.kyle_accounts WHERE username = '$username' AND password = '$password';");
-
-
-
                if ($_SESSION['attempts'] < 2) // Less than 2 because it starts the count from 0
                {
-
-                   if ($findUser && password_verify($password, $findUser['password']))
-                     {
+                 if ($findUser && password_verify($password, $findUser['password']))
+                 {
                      echo '<br>The username and password are correct 🤗<br>';
                      echo '<br>Redirecting you to Homepage in 3 seconds… ⏲<br>';
                      $_SESSION['attempts'] = 0;
                      $_SESSION['logged'] = true;
                      $_SESSION['user'] = $username;
+                     $_SESSION['account'] = 'employee';
                      header("Refresh:3; url=index.php");
-                     }
 
-                     else {
+                 }
+                 else
+                 {
                      echo '<br><h2>The username or password are incorrect!</h2>';
                      $_SESSION['attempts']++;
                      echo '<h4>Login Attempts: ';
                      echo $_SESSION['attempts'];
                      echo '</h4>';
-                     }
-
-
+                 }
 
                }
 
@@ -79,7 +73,7 @@
                  }
 
                  else {
-                   echo '<br><h2>you are not allowed to log-in for 15 minutes 😝</h2>';
+                   echo '<br><h2>Account is now locked. Please try again later. 😝</h2>';
                    $_SESSION['timeout'] = time();
                  }
 

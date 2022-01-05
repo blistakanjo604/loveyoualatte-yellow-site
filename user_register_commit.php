@@ -1,8 +1,4 @@
-<?php session_start();
-if ($_SESSION['logged'] != true) {
-   header("Location: login.php");
-     exit();
-  }?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -12,14 +8,14 @@ if ($_SESSION['logged'] != true) {
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/hamburger.css">
       <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
-      <title>🚪 Register Employee 👤</title>
+      <title>🚪 Signup 👤</title>
    </head>
    <body>
       <?php include 'includes/hamburger.php' ?>
       <header class="showcase">
          <div class="showcase-inner">
-            <h1>🚪 Register Employee 👤</h1>
-            <form action=register_commit.php method="POST">
+            <h1>🚪 Signup 👤</h1>
+            <form action=user_register_commit.php method="POST">
                <table>
                   <th>
                   <tr> </tr>
@@ -27,7 +23,7 @@ if ($_SESSION['logged'] != true) {
                   </th>
                   <tr>
                      <td align="left">Please enter your desired username: &nbsp; &nbsp;</td>
-                     <td><input type="text" id="username" name="username" placeholder="user_name987"></td>
+                     <td><input type="text" id="username" name="username" placeholder="username"></td>
                   </tr>
                   <tr>
                      <td align="left">Please enter your desired password: &nbsp; &nbsp;</td>
@@ -74,11 +70,13 @@ if ($_SESSION['logged'] != true) {
                        include_once 'includes/init_connect.php';
 
 
-                       $sql = "INSERT INTO `testing`.`kyle_accounts` (`username`, `password`) VALUES ('$username', '$hash');";
+                       $sql = "INSERT INTO `testing`.`user_accounts` (`username`, `password`) VALUES ('$username', '$hash');";
 
 
                        if ($conn->query($sql) === true) {
-                           echo "<br><h2>Employee added successfully</h2>";
+                           echo "<br><h2>Signup Successful</h2>";
+                           echo '<br>Redirecting you to Homepage in 3 seconds… ⏲<br>';
+                           header("Refresh:3; url=index.php");  
                        } else {
                            echo "Error: " . $sql . "<br>" . $conn->error;
                        }

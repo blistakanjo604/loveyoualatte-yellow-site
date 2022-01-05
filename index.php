@@ -30,7 +30,13 @@
 
                include_once 'includes/db_connect.php';
 
-
+               if($_SESSION['logged']==true)
+               {
+                  echo '<br><br><h2>Welcome ';
+                  echo $_SESSION['user'];
+                  echo '!! 🎉</h2>';
+               }
+               
                ?>
          </div>
       </header>

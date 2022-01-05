@@ -72,6 +72,20 @@
       }
     break;
     case "empty":
+      $dbServername = "localhost";
+      $dbUsername = "yellow";
+      $dbPassword = "YellowTA@m-!02Server";
+
+      $conn = new mysqli($dbServername, $dbUsername, $dbPassword);
+
+      $checkout_name = $_SESSION['user'];
+    //  $cart = $_SESSION['cart_item'];
+      $checkout_cart = array_merge($_SESSION["cart_item"],$itemArray);
+      //$db_handle->runQuery("INSERT INTO `testing`.`checkout` (`user`, `cart`) VALUES ('$checkout_name', '$checkout_cart')");
+      $sql = ("INSERT INTO `testing`.`checkout` (`user`, `cart`) VALUES ('giowashere', 'coffee');");
+
+      $conn->query($sql);
+      
       unset($_SESSION["cart_item"]);
     break;
    }
@@ -96,9 +110,50 @@
             <div id="shopping-cart">
                <div class="txt-heading">
                   <h1>🧾 Receipt 🧾</h1>
-                  <h3>
-                  Receipt Number: <?php echo rand(1, 1000000); ?>
-                  <h4><?php date_default_timezone_set("America/New_York"); echo date("Y-m-d h:i:sa"); ?></h4>
+
+                  <?php
+                     if($_SESSION['logged']==true)
+                       {
+                          if($_SESSION['account']=='employee') {
+                            echo '<h3> Employee Name: ';
+                            echo $_SESSION['user'];
+                            echo '</h3>';
+                            echo '<h3> Employee Receipt Number: ';
+                            echo rand(1, 1000000);
+                            echo '</h3>';
+                            date_default_timezone_set("America/New_York");
+                            echo '<h4>';
+                            echo date("Y-m-d h:i:sa");
+                            echo '</h4>';
+                          }
+
+                          else {
+                            echo '<h3> User Receipt for: ';
+                            echo $_SESSION['user'];
+                            echo '</h3>';
+                            echo '<h3> Receipt Number: ';
+                            echo rand(1, 1000000);
+                            echo '</h3>';
+                            date_default_timezone_set("America/New_York");
+                            echo '<h4>';
+                            echo date("Y-m-d h:i:sa");
+                            echo '</h4>';
+                          }
+                       }
+                     elseif($_SESSION['logged']==false)
+                       { ?>
+
+                         <h3>
+                         Guest Receipt Number: <?php echo rand(1, 1000000); ?> <h3>
+                         <h4><?php date_default_timezone_set("America/New_York"); echo date("Y-m-d h:i:sa"); ?></h4>
+
+
+                      <?php } ?>
+
+
+
+
+
                </div>
                <br>
                <br>

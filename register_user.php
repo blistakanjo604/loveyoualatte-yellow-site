@@ -1,8 +1,4 @@
-<?php session_start();
-if ($_SESSION['logged'] != true) {
-   header("Location: login.php");
-     exit();
-  }?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -12,14 +8,14 @@ if ($_SESSION['logged'] != true) {
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="css/hamburger.css">
       <link rel = "icon" href = "img/site-icon.webp" type = "image/x-icon">
-      <title>🚪 Register Employee 👤</title>
+      <title>🚪 Signup 👤</title>
    </head>
    <body>
      <?php include 'includes/hamburger.php' ?>
       <header class="showcase">
          <div class="showcase-inner">
-            <h1>🚪 Register Employee 👤</h1>
-            <form action=employee_register_commit.php method="POST">
+            <h1>🚪 Signup 👤</h1>
+            <form action=user_register_commit.php method="POST">
               <table>
               <th>
               <tr> </tr>
