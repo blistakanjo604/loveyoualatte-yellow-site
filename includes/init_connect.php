@@ -1,7 +1,7 @@
 <?php
-   $dbServername = "localhost";
-   $dbUsername = "yellow";
-   $dbPassword = "YellowTA@m-!02Server";
+   $dbServername = ;
+   $dbUsername = ;
+   $dbPassword = ;
 
 
    // Initialize Connection
